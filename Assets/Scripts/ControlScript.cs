@@ -13,10 +13,14 @@ public class ControlScript : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector3 myDir;
+    private BoxCollider2D myCol;
+    private bool isInside = false;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        myCol = GetComponent<BoxCollider2D>();
+        Debug.Log(myCol);
     }
 
     public void SetRotateAmount(float curAmount, float maxAmount)
@@ -28,17 +32,27 @@ public class ControlScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject != null)
+        if (myCol != null)
         {
-            other.gameObject.transform.SetParent(null, true);
+            if (other.gameObject != null && isInside)
+            {
+                isInside = false;
+                Debug.Log("Out");
+                other.gameObject.transform.SetParent(null, true);
+            }
         }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject != null)
+        if (myCol != null)
         {
-            other.gameObject.transform.SetParent(transform, true);
+            if (other.gameObject != null && myCol.IsTouching(other))
+            {
+                other.gameObject.transform.SetParent(transform, true);
+                isInside = true;
+            }
         }
     }
 
