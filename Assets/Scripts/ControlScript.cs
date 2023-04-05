@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ControlScript : MonoBehaviour
 {
     public float rotateSpeed = 10.0f;
+    public bool isMenu = false;
     private float totalDegrees = 0.0f;
     public Slider rotateBar;
 
@@ -25,17 +26,42 @@ public class ControlScript : MonoBehaviour
         rotateBar.value = curAmount;
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject != null)
+        {
+            other.gameObject.transform.SetParent(null, true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject != null)
+        {
+            other.gameObject.transform.SetParent(transform, true);
+        }
+    }
+
     void FixedUpdate()
     {
         /*float funny = Input.GetAxis("Vertical");*/
         float turn = Input.GetAxis("Horizontal");
         /*transform.Rotate(-funny * rotateSpeed, 0f, -turn * rotateSpeed);*/
-        if (totalDegrees >= 0.0f)
+        
+        if (!isMenu)
+        {
+            rotateBar.value = totalDegrees;
+            if (totalDegrees >= 0.0f)
+            {
+                transform.Rotate(0f, 0f, -turn * rotateSpeed);
+                totalDegrees -= Mathf.Abs(turn);
+            }
+        }
+        else
         {
             transform.Rotate(0f, 0f, -turn * rotateSpeed);
-            totalDegrees -= Mathf.Abs(turn);
         }
-        rotateBar.value = totalDegrees;
+        
 
         // debugging stuff
         if (Input.GetKey(KeyCode.Alpha1))

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
+    [Header("Scene Settings")]
     public float slowdownFactor = 0.05f;
     public int totalScenes = 7;
     public float holdToRestart = 2.0f;
@@ -23,6 +24,11 @@ public class GameLogic : MonoBehaviour
     private bool isWin = false;
     private RotationManager rotationManager;
     private bool isFinishCalled = false;
+    private ControlScript myControl;
+
+    /*[Header("Secret Settings DO NOT CHANGE!!!")]
+    public bool canTransition = false;
+    public bool needsRestart = false;*/
 
     private void Start()
     {
@@ -30,65 +36,88 @@ public class GameLogic : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
 
         // GUI Stuff
-        winPanel = GameObject.FindGameObjectWithTag("WinPanel");
-        losePanel = GameObject.FindGameObjectWithTag("LosePanel");
-        restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
-        restartBar = GameObject.FindGameObjectWithTag("RestartBar").GetComponent<Slider>();
-        mySource = GetComponent<AudioSource>();
-        restartBar.value = 0;
-        restartBar.maxValue = holdToRestart;
-
-        GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
-        if (tmp == null)
+        myControl = GameObject.FindGameObjectWithTag("Level").GetComponent<ControlScript>();
+       
+        if (!myControl.isMenu)
         {
-            tmp = GameObject.FindGameObjectWithTag("OldRotManager");
-        }
-        rotationManager = tmp.GetComponent<RotationManager>();
+            winPanel = GameObject.FindGameObjectWithTag("WinPanel");
+            losePanel = GameObject.FindGameObjectWithTag("LosePanel");
+            restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
+            mySource = GetComponent<AudioSource>();
+            if (GameObject.FindGameObjectWithTag("RestartBar") != null)
+            {
+                restartBar = GameObject.FindGameObjectWithTag("RestartBar").GetComponent<Slider>();
+                restartBar.value = 0;
+                restartBar.maxValue = holdToRestart;
+            }
+            holdTimer = holdToRestart;
 
-        if (rotationManager.startLevelIndex == -1)
-        {
-            rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
+            if (tmp == null)
+            {
+                tmp = GameObject.FindGameObjectWithTag("OldRotManager");
+            }
+            if (tmp != null)
+            {
+                rotationManager = tmp.GetComponent<RotationManager>();
+
+                if (rotationManager.startLevelIndex == -1)
+                {
+                    rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
+                }
+            }
+
+
+            myControl.SetRotateAmount(rotationManager.curRotation, rotationManager.totalRotation);
+            restartGUI.SetActive(false);
+            winPanel.SetActive(false);
+            losePanel.SetActive(false);
         }
-        holdTimer = holdToRestart;
-        GameObject.FindGameObjectWithTag("Level").GetComponent<ControlScript>().SetRotateAmount(rotationManager.curRotation, rotationManager.totalRotation);
-        restartGUI.SetActive(false);
-        winPanel.SetActive(false);
-        losePanel.SetActive(false);
+        
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (!myControl.isMenu)
         {
-            restartGUI.SetActive(true);
-            holdTimer -= Time.deltaTime;
-            restartBar.value = restartBar.maxValue - holdTimer;
-            if (holdTimer < 0)
+            if (Input.GetKey(KeyCode.R))
             {
-                Debug.Log("Starting at beginning");
-                rotationManager.tag = "OldRotManager";
-                SceneManager.LoadScene(rotationManager.startLevelIndex);
+                restartGUI.SetActive(true);
+                holdTimer -= Time.deltaTime;
+                restartBar.value = restartBar.maxValue - holdTimer;
+                if (holdTimer < 0)
+                {
+                    Debug.Log("Starting at beginning");
+                    rotationManager.tag = "OldRotManager";
+                    FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);
+                }
             }
-        }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            restartGUI.SetActive(false);
-            rotationManager.tag = "OldRotManager";
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Application.Quit();
+            if (Input.GetKeyUp(KeyCode.R))
+            {
+                restartGUI.SetActive(false);
+                rotationManager.tag = "OldRotManager";
+                FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
+            }
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
+
+            if (isLevelFinished && isWin)
+            {
+                if (SceneManager.GetActiveScene().buildIndex < totalScenes)
+                {
+                    /*SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);*/
+                    FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex + 1);
+                }
+                else
+                {
+                    FindObjectOfType<LevelLoader>().LoadThisLevel(0);
+                }
+            }
         }
         
-
-        if (isLevelFinished && isWin)
-        {
-            if (SceneManager.GetActiveScene().buildIndex < totalScenes)
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            }
-        }
     }
 
     public bool GetLevelFinished()
@@ -109,7 +138,7 @@ public class GameLogic : MonoBehaviour
                 rotationManager.curRotation = GameObject.FindGameObjectWithTag("Level").GetComponent<ControlScript>().GetRotationLeft();
                 rotationManager.tag = "OldRotManager";
                 winPanel.SetActive(true);
-                StartCoroutine(CountDown(3.5f));
+                StartCoroutine(CountDown(1.5f));
                 mySource.clip = winClips[Random.Range(0, winClips.Length)];
                 mySource.pitch = Random.Range(1.0f, 2.0f);
                 mySource.Play();
@@ -134,5 +163,7 @@ public class GameLogic : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(time);
         isLevelFinished = true;
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
     }
 }

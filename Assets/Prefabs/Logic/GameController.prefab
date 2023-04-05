@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownFactor: 0.1
-  totalScenes: 12
+  totalScenes: 14
   holdToRestart: 2
   loseClips:
   - {fileID: 8300000, guid: 6fae973157f8d21469f44d4549c43383, type: 3}

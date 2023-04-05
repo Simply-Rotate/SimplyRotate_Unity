@@ -17,6 +17,7 @@ public class PlayerBehavior : MonoBehaviour
     }
     private void OnBecameInvisible()
     {
+        gameObject.SetActive(false);
         Destroy(gameObject);
     }
 

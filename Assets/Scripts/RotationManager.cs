@@ -18,4 +18,14 @@ public class RotationManager : MonoBehaviour
             Destroy(rot);
         }
     }
+
+    public void AddRotation(float amount)
+    {
+        curRotation += amount;
+        if (curRotation > totalRotation)
+        {
+            curRotation = totalRotation;
+        }
+        FindObjectOfType<ControlScript>().SetRotateAmount(curRotation, totalRotation);
+    }
 }
