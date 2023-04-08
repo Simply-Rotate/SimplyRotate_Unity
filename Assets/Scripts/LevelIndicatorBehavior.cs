@@ -8,6 +8,7 @@ public class LevelIndicatorBehavior : MonoBehaviour
     public int numOfLevels = 0;
     public int curLevel = 0;
     public Color levelColor;
+    public GameObject curLevelIndicatorPrefab;
     private void Start()
     {
         int nums = transform.childCount;
@@ -23,5 +24,8 @@ public class LevelIndicatorBehavior : MonoBehaviour
         {
             myChildren[i].GetComponent<SpriteRenderer>().color = levelColor;
         }
+        Vector3 spawnPos = myChildren[curLevel].transform.position;
+        GameObject indicator = Instantiate(curLevelIndicatorPrefab, spawnPos, Quaternion.identity);
+        indicator.transform.parent = transform;
     }
 }

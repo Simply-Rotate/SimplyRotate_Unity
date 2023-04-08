@@ -1311,6 +1311,7 @@ MonoBehaviour:
   numOfLevels: 0
   curLevel: 0
   levelColor: {r: 0, g: 0, b: 0, a: 0}
+  curLevelIndicatorPrefab: {fileID: 7347384100315027853, guid: 7ed4bac088e85d941b34c5a5dc017ebc, type: 3}
 --- !u!1 &8660206461874012799
 GameObject:
   m_ObjectHideFlags: 0
