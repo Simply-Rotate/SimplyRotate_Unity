@@ -357,6 +357,7 @@ MonoBehaviour:
   rotateSpeed: 2
   isMenu: 0
   rotateBar: {fileID: 1621200137}
+  speedUpFactor: 3
 --- !u!50 &254604097
 Rigidbody2D:
   serializedVersion: 4
