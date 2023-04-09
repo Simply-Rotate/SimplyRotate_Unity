@@ -11,7 +11,7 @@ public class ControlScript : MonoBehaviour
     private float totalDegrees = 0.0f;
     public Slider rotateBar;
     private float speedUpFactor = 3.0f;
-
+    public bool canRotate = true;
     private Rigidbody2D rb;
     private Vector3 myDir;
     private BoxCollider2D myCol;
@@ -82,27 +82,31 @@ public class ControlScript : MonoBehaviour
             rotateFactor = 0.0f;
         }
 
-        if (!isMenu)
+        if (canRotate)
         {
-            rotateBar.value = totalDegrees;
-            if (totalDegrees >= 0.0f)
+            if (!isMenu)
             {
-                transform.Rotate(0f, 0f, -turn * rotateSpeed);
-                rotateFactor += Mathf.Abs(turn) * 0.5f;
-                if (rotateFactor >= 0.95f)
+                rotateBar.value = totalDegrees;
+                if (totalDegrees >= 0.0f)
                 {
-                    totalDegrees -= Mathf.Abs(turn);
-                }
-                else if (rotateFactor < 0.95f)
-                {
-                    totalDegrees -= Mathf.Abs(turn * 0.2f);
+                    transform.Rotate(0f, 0f, -turn * rotateSpeed);
+                    rotateFactor += Mathf.Abs(turn) * 0.5f;
+                    if (rotateFactor >= 0.95f)
+                    {
+                        totalDegrees -= Mathf.Abs(turn);
+                    }
+                    else if (rotateFactor < 0.95f)
+                    {
+                        totalDegrees -= Mathf.Abs(turn * 0.2f);
+                    }
                 }
             }
+            else
+            {
+                transform.Rotate(0f, 0f, -turn * rotateSpeed);
+            }
         }
-        else
-        {
-            transform.Rotate(0f, 0f, -turn * rotateSpeed);
-        }
+        
 
         if (canSpeedUp)
         {

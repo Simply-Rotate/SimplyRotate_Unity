@@ -12,6 +12,8 @@ TagManager:
   - LosePanel
   - RestartGUI
   - RestartBar
+  - MusicController
+  - RestartIcon
   layers:
   - Default
   - TransparentFX

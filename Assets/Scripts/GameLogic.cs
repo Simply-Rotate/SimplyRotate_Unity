@@ -9,7 +9,7 @@ public class GameLogic : MonoBehaviour
     [Header("Scene Settings")]
     public float slowdownFactor = 0.05f;
     public int totalScenes = 7;
-    public float holdToRestart = 2.0f;
+    private float holdToRestart = 2.0f;
     [SerializeField] private AudioClip[] loseClips;
     [SerializeField] private AudioClip[] winClips;
     private AudioSource mySource;
@@ -25,6 +25,9 @@ public class GameLogic : MonoBehaviour
     private RotationManager rotationManager;
     private bool isFinishCalled = false;
     private ControlScript myControl;
+    private bool canRestart = true;
+    private bool curLevelFin = false;
+    private GameObject restartIcon;
 
     /*[Header("Secret Settings DO NOT CHANGE!!!")]
     public bool canTransition = false;
@@ -43,6 +46,7 @@ public class GameLogic : MonoBehaviour
             winPanel = GameObject.FindGameObjectWithTag("WinPanel");
             losePanel = GameObject.FindGameObjectWithTag("LosePanel");
             restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
+            restartIcon = GameObject.FindGameObjectWithTag("RestartIcon");
             mySource = GetComponent<AudioSource>();
             if (GameObject.FindGameObjectWithTag("RestartBar") != null)
             {
@@ -66,8 +70,6 @@ public class GameLogic : MonoBehaviour
                     rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
                 }
             }
-
-
             myControl.SetRotateAmount(rotationManager.curRotation, rotationManager.totalRotation);
             restartGUI.SetActive(false);
             winPanel.SetActive(false);
@@ -80,24 +82,29 @@ public class GameLogic : MonoBehaviour
     {
         if (!myControl.isMenu)
         {
-            if (Input.GetKey(KeyCode.R))
+            if (canRestart)
             {
-                restartGUI.SetActive(true);
-                holdTimer -= Time.deltaTime;
-                restartBar.value = restartBar.maxValue - holdTimer;
-                if (holdTimer < 0)
+                if (Input.GetKey(KeyCode.R))
                 {
-                    Debug.Log("Starting at beginning");
+                    restartGUI.SetActive(true);
+                    restartIcon.SetActive(false);
+                    holdTimer -= Time.deltaTime;
+                    restartBar.value = restartBar.maxValue - holdTimer;
+                    if (holdTimer < 0)
+                    {
+                        Debug.Log("Starting at beginning");
+                        rotationManager.tag = "OldRotManager";
+                        FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);
+                    }
+                }
+                if (Input.GetKeyUp(KeyCode.R))
+                {
+                    restartGUI.SetActive(false);
                     rotationManager.tag = "OldRotManager";
-                    FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);
+                    FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
                 }
             }
-            if (Input.GetKeyUp(KeyCode.R))
-            {
-                restartGUI.SetActive(false);
-                rotationManager.tag = "OldRotManager";
-                FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
-            }
+            
             if (Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
@@ -122,20 +129,22 @@ public class GameLogic : MonoBehaviour
 
     public bool GetLevelFinished()
     {
-        return isLevelFinished;
+        return curLevelFin;
     }
 
     public void FinishLevel(bool winStatus)
     {
         isWin = winStatus;
-        
+        myControl.canRotate = false;
         if (!isFinishCalled)
         {
             isFinishCalled = true;
             if (winStatus)
             {
+                curLevelFin = true;
+                canRestart = false;
                 DoSlowMotion();
-                rotationManager.curRotation = GameObject.FindGameObjectWithTag("Level").GetComponent<ControlScript>().GetRotationLeft();
+                rotationManager.curRotation = myControl.GetRotationLeft();
                 rotationManager.tag = "OldRotManager";
                 winPanel.SetActive(true);
                 StartCoroutine(CountDown(1.5f));

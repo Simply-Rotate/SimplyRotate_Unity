@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBehavior : MonoBehaviour
+public class DeliveryBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private GameObject colParticles;
     private Rigidbody2D myRb;
     private AudioSource mySource;
     private bool canPlaySound = false;
+    private GameLogic gController;
     private void Start()
     {
         mySource = GetComponent<AudioSource>();
         myRb = GetComponent<Rigidbody2D>();
+        gController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLogic>();
         StartCoroutine(InitPhase());
     }
     private void OnBecameInvisible()
@@ -23,7 +25,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        GameLogic gController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameLogic>();
+        
         if (other.gameObject.tag == "Enemy" && !gController.GetLevelFinished())
         {
             gController.FinishLevel(false);
