@@ -74,6 +74,23 @@ public class GameLogic : MonoBehaviour
             restartGUI.SetActive(false);
             winPanel.SetActive(false);
             losePanel.SetActive(false);
+
+            GameSettings mySettings = FindObjectOfType<GameSettings>();
+            Debug.Log(mySettings.GetCanShowHint());
+            if (!mySettings.GetCanShowHint())
+            {
+                GameObject[] hints = GameObject.FindGameObjectsWithTag("LevelRotateAmount");
+                Debug.Log(hints);
+                if (hints.Length != 0)
+                {
+                    foreach (GameObject hint in hints)
+                    {
+                        hint.SetActive(false);
+                    }
+                }
+            }
+
+
         }
         
     }

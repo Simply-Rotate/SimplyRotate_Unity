@@ -120,12 +120,12 @@ public class ControlScript : MonoBehaviour
         
 
         // debugging stuff
-        /*if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha1))
         {
             FindObjectOfType<RotationManager>().tag = "OldRotManager";
             SceneManager.LoadScene(0);
         }
-        if (Input.GetKey(KeyCode.Alpha2))
+        /*if (Input.GetKey(KeyCode.Alpha2))
         {
             FindObjectOfType<RotationManager>().tag = "OldRotManager";
             SceneManager.LoadScene(2);
