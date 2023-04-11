@@ -10,7 +10,7 @@ public class ControlScript : MonoBehaviour
     public bool isMenu = false;
     private float totalDegrees = 0.0f;
     public Slider rotateBar;
-    private float speedUpFactor = 3.0f;
+    private float speedUpFactor = 1.5f;
     public bool canRotate = true;
     private Rigidbody2D rb;
     private Vector3 myDir;
