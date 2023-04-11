@@ -125,6 +125,11 @@ public class ControlScript : MonoBehaviour
             FindObjectOfType<RotationManager>().tag = "OldRotManager";
             SceneManager.LoadScene(0);
         }
+
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene(17);
+        }
         /*if (Input.GetKey(KeyCode.Alpha2))
         {
             FindObjectOfType<RotationManager>().tag = "OldRotManager";
