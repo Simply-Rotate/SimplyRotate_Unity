@@ -8,6 +8,7 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
+    [SerializeField] private int lvl; 
 
     public void LoadThisLevel(int sceneInd)
     {
@@ -20,5 +21,17 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public void LoadThisLevelByName(int lvl)
+    {
+        StartCoroutine(LoadLevelByName("Level_" + lvl.ToString()));
+    }
+
+    IEnumerator LoadLevelByName(string sceneName)
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneName);
     }
 }
