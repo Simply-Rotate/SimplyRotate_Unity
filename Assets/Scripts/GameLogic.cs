@@ -28,6 +28,7 @@ public class GameLogic : MonoBehaviour
     private bool canRestart = true;
     private bool curLevelFin = false;
     private GameObject restartIcon;
+    private float startingRotationAmount = 0.0f;
 
     /*[Header("Secret Settings DO NOT CHANGE!!!")]
     public bool canTransition = false;
@@ -64,7 +65,7 @@ public class GameLogic : MonoBehaviour
             if (tmp != null)
             {
                 rotationManager = tmp.GetComponent<RotationManager>();
-
+                startingRotationAmount = rotationManager.curRotation;
                 if (rotationManager.startLevelIndex == -1)
                 {
                     rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
@@ -110,14 +111,14 @@ public class GameLogic : MonoBehaviour
                     if (holdTimer < 0)
                     {
                         Debug.Log("Starting at beginning");
-                        rotationManager.tag = "OldRotManager";
+                        
                         FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);
                     }
                 }
                 if (Input.GetKeyUp(KeyCode.R))
                 {
                     restartGUI.SetActive(false);
-                    rotationManager.tag = "OldRotManager";
+                    rotationManager.curRotation = startingRotationAmount;
                     FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
                 }
             }
@@ -160,10 +161,8 @@ public class GameLogic : MonoBehaviour
             {
                 curLevelFin = true;
                 canRestart = false;
-                DoSlowMotion();
-                rotationManager.curRotation = myControl.GetRotationLeft();
-                rotationManager.tag = "OldRotManager";
                 winPanel.SetActive(true);
+                rotationManager.curRotation = myControl.GetRotationLeft();
                 StartCoroutine(CountDown(1.5f));
                 mySource.clip = winClips[Random.Range(0, winClips.Length)];
                 mySource.pitch = Random.Range(1.0f, 2.0f);

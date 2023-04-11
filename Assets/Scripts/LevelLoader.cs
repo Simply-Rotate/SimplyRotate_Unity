@@ -8,11 +8,31 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 1f;
-    [SerializeField] private int lvl; 
+    private RotationManager rotationManager;
+
+    [SerializeField] private int lvl;
+
+    private void Start()
+    {
+        GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
+        if (tmp == null)
+        {
+            tmp = GameObject.FindGameObjectWithTag("OldRotManager");
+        }
+        if (tmp != null)
+        {
+            rotationManager = tmp.GetComponent<RotationManager>();
+
+            if (rotationManager.startLevelIndex == -1)
+            {
+                rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
+            }
+        }
+    }
 
     public void LoadThisLevel(int sceneInd)
     {
-        
+        rotationManager.tag = "OldRotManager";
         StartCoroutine(LoadLevel(sceneInd));
     }
 
@@ -25,6 +45,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadThisLevelByName(int lvl)
     {
+        rotationManager.tag = "OldRotManager";
         StartCoroutine(LoadLevelByName("Level_" + lvl.ToString()));
     }
 
