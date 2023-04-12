@@ -15,6 +15,7 @@ TagManager:
   - MusicController
   - RestartIcon
   - LevelRotateAmount
+  - Respawner
   layers:
   - Default
   - TransparentFX

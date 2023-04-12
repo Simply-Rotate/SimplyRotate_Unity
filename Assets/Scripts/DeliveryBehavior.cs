@@ -49,6 +49,13 @@ public class DeliveryBehavior : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Respawner")
+        {
+            this.transform.position = new Vector3(0, 12, 0);
+        }
+    }
 
     IEnumerator InitPhase()
     {
