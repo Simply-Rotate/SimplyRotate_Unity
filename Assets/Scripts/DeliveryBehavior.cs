@@ -10,6 +10,9 @@ public class DeliveryBehavior : MonoBehaviour
     private AudioSource mySource;
     private bool canPlaySound = false;
     private GameLogic gController;
+    public bool canComeBack = false;
+
+    private bool isInside = true;
     private void Start()
     {
         mySource = GetComponent<AudioSource>();
@@ -49,6 +52,12 @@ public class DeliveryBehavior : MonoBehaviour
                 mySource.Play();
             }
         }
+
+        if ((canComeBack) && other.gameObject.tag == "Level")
+        {
+            if (other.gameObject.GetComponent<ControlScript>().isInside)
+                transform.SetParent(other.transform, true);
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -58,9 +67,28 @@ public class DeliveryBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Level" && canComeBack)
+        {
+            other.gameObject.GetComponent<ControlScript>().isInside = true;
+        }
+    }
+
+    public void StartTimeOut()
+    {
+        StartCoroutine(TimeOut());
+    }
+
     IEnumerator InitPhase()
     {
         yield return new WaitForSecondsRealtime(0.5f);
         canPlaySound = true;
+    }
+
+    IEnumerator TimeOut()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        canComeBack = true;
     }
 }

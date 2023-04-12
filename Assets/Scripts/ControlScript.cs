@@ -15,7 +15,7 @@ public class ControlScript : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 myDir;
     private BoxCollider2D myCol;
-    private bool isInside = false;
+    public bool isInside = false;
     private float rotateFactor = 0.0f;
     private bool canSpeedUp = false;
 
@@ -45,6 +45,13 @@ public class ControlScript : MonoBehaviour
             }
         }*/
         other.gameObject.transform.SetParent(null, true);
+        /*other.gameObject.GetComponent<Rigidbody2D>().AddForce(GetComponent<Rigidbody2D>().velocity);*/
+        if (other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<DeliveryBehavior>().canComeBack = false;
+            other.gameObject.GetComponent<DeliveryBehavior>().StartTimeOut();
+            isInside = false;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -57,7 +64,35 @@ public class ControlScript : MonoBehaviour
                 isInside = true;
             }
         }*/
-        other.gameObject.transform.SetParent(transform, true);
+        Vector2 prevVelo = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+        if (other.gameObject.tag != "Player")
+        {
+            other.gameObject.transform.SetParent(transform, true);
+        }
+        else
+        {
+            if (other.gameObject.GetComponent<DeliveryBehavior>().canComeBack)
+            {
+                other.gameObject.transform.SetParent(transform, true);
+                isInside = true;
+            }
+        }
+        other.gameObject.GetComponent<Rigidbody2D>().velocity = prevVelo + GetComponent<Rigidbody2D>().velocity;
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        
+        /*if (other.gameObject.tag == "Player" && !isInside)
+        {
+            Vector2 prevVelo = other.gameObject.GetComponent<Rigidbody2D>().velocity;
+            if (other.gameObject.GetComponent<DeliveryBehavior>().canComeBack)
+            {
+                other.gameObject.transform.SetParent(transform, true);
+                other.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity + prevVelo;
+            }
+            
+        }*/
     }
 
     private void Update()
