@@ -104,6 +104,7 @@ public class GameLogic : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.R))
                 {
+                    //Time.timeScale = 1.0f;
                     restartGUI.SetActive(true);
                     restartIcon.SetActive(false);
                     holdTimer -= Time.deltaTime;
@@ -117,6 +118,7 @@ public class GameLogic : MonoBehaviour
                 }
                 if (Input.GetKeyUp(KeyCode.R))
                 {
+                    //Time.timeScale = 1.0f;
                     restartGUI.SetActive(false);
                     rotationManager.curRotation = startingRotationAmount;
                     FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);

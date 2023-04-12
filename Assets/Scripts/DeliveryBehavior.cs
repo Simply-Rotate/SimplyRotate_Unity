@@ -28,6 +28,7 @@ public class DeliveryBehavior : MonoBehaviour
         
         if (other.gameObject.tag == "Enemy" && !gController.GetLevelFinished())
         {
+            //Time.timeScale = 0.3f;
             gController.FinishLevel(false);
             GameObject particles = Instantiate(deathParticles, other.transform.position, Quaternion.identity);
             particles.transform.parent = GameObject.FindGameObjectWithTag("Level").transform;
