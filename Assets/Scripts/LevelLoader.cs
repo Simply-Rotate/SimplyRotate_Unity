@@ -32,7 +32,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadThisLevel(int sceneInd)
     {
-        rotationManager.tag = "OldRotManager";
+        if (rotationManager != null) rotationManager.tag = "OldRotManager";
         StartCoroutine(LoadLevel(sceneInd));
     }
 
@@ -45,7 +45,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadThisLevelByName(int lvl)
     {
-        rotationManager.tag = "OldRotManager";
+        if (rotationManager != null) rotationManager.tag = "OldRotManager";
         StartCoroutine(LoadLevelByName("Level_" + lvl.ToString()));
     }
 
