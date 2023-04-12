@@ -35,35 +35,12 @@ public class ControlScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        /*if (myCol != null)
-        {
-            if (other.gameObject != null && isInside)
-            {
-                Debug.Log(other);
-                isInside = false;
-                other.gameObject.transform.SetParent(null, true);
-            }
-        }*/
         other.gameObject.transform.SetParent(null, true);
-        /*other.gameObject.GetComponent<Rigidbody2D>().AddForce(GetComponent<Rigidbody2D>().velocity);*/
-        if (other.gameObject.tag == "Player")
-        {
-            other.gameObject.GetComponent<DeliveryBehavior>().canComeBack = false;
-            other.gameObject.GetComponent<DeliveryBehavior>().StartTimeOut();
-            isInside = false;
-        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        /*if (myCol != null)
-        {
-            if (other.gameObject != null && myCol.IsTouching(other))
-            {
-                other.gameObject.transform.SetParent(transform, true);
-                isInside = true;
-            }
-        }*/
         Vector2 prevVelo = other.gameObject.GetComponent<Rigidbody2D>().velocity;
         if (other.gameObject.tag != "Player")
         {
@@ -78,21 +55,6 @@ public class ControlScript : MonoBehaviour
             }
         }
         other.gameObject.GetComponent<Rigidbody2D>().velocity = prevVelo + GetComponent<Rigidbody2D>().velocity;
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        
-        /*if (other.gameObject.tag == "Player" && !isInside)
-        {
-            Vector2 prevVelo = other.gameObject.GetComponent<Rigidbody2D>().velocity;
-            if (other.gameObject.GetComponent<DeliveryBehavior>().canComeBack)
-            {
-                other.gameObject.transform.SetParent(transform, true);
-                other.gameObject.GetComponent<Rigidbody2D>().velocity = GetComponent<Rigidbody2D>().velocity + prevVelo;
-            }
-            
-        }*/
     }
 
     private void Update()

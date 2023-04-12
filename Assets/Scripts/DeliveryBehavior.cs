@@ -11,8 +11,6 @@ public class DeliveryBehavior : MonoBehaviour
     private bool canPlaySound = false;
     private GameLogic gController;
     public bool canComeBack = false;
-
-    private bool isInside = true;
     private void Start()
     {
         mySource = GetComponent<AudioSource>();
@@ -72,6 +70,16 @@ public class DeliveryBehavior : MonoBehaviour
         if (other.gameObject.tag == "Level" && canComeBack)
         {
             other.gameObject.GetComponent<ControlScript>().isInside = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Level")
+        {
+            canComeBack = false;
+            StartTimeOut();
+            other.gameObject.GetComponent<ControlScript>().isInside = false;
         }
     }
 
