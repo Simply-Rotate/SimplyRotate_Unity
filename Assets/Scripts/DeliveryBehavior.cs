@@ -21,7 +21,7 @@ public class DeliveryBehavior : MonoBehaviour
     private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
-        Destroy(gameObject);
+        /*Destroy(gameObject);*/
     }
 
     private void OnCollisionEnter2D(Collision2D other)
