@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7546669465211234044}
   - component: {fileID: 7546669465211234042}
   - component: {fileID: 7546669465211234043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RotatePickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
