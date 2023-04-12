@@ -35,28 +35,29 @@ public class ControlScript : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (myCol != null)
+        /*if (myCol != null)
         {
             if (other.gameObject != null && isInside)
             {
+                Debug.Log(other);
                 isInside = false;
-                Debug.Log("Out");
                 other.gameObject.transform.SetParent(null, true);
             }
-        }
-        
+        }*/
+        other.gameObject.transform.SetParent(null, true);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (myCol != null)
+        /*if (myCol != null)
         {
             if (other.gameObject != null && myCol.IsTouching(other))
             {
                 other.gameObject.transform.SetParent(transform, true);
                 isInside = true;
             }
-        }
+        }*/
+        other.gameObject.transform.SetParent(transform, true);
     }
 
     private void Update()
