@@ -215,7 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5471807718013515585}
   - component: {fileID: 7924365855961038107}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7716808994958617853}
   - component: {fileID: 3109618716465687055}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,7 +569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4128103893165372187}
   - component: {fileID: 1753409575581666891}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6804933252208461090}
   - component: {fileID: 3015649447214778362}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1186,7 +1186,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8159786197463484741}
   - component: {fileID: 5482312511648568730}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1270,7 +1270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4633283911741108647}
   - component: {fileID: 7941647498346651346}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: LevelIndicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
