@@ -358,6 +358,7 @@ MonoBehaviour:
   isMenu: 0
   rotateBar: {fileID: 1621200137}
   canRotate: 1
+  isInside: 0
 --- !u!50 &254604097
 Rigidbody2D:
   serializedVersion: 4
@@ -429,6 +430,10 @@ PrefabInstance:
     - target: {fileID: 4110201317061176614, guid: 593207ab81cd9c4429f2676f0df2f715, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110201317061176792, guid: 593207ab81cd9c4429f2676f0df2f715, type: 3}
+      propertyPath: m_RequiresOpaqueTextureOption
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4110201317061176793, guid: 593207ab81cd9c4429f2676f0df2f715, type: 3}
       propertyPath: m_ClearFlags
