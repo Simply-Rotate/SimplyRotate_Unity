@@ -60,11 +60,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _NoiseAmount: 0.02
-    - _NoiseScale: 1
+    - _NoiseScale: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _ScanningLines: 1.5
-    - _ScanningLinesAmount: 0.015
+    - _ScanningLines: 1.25
+    - _ScanningLinesAmount: 0.01
     - _ScanningLinesSpeed: 0.5
     - _StaticAmount: 0
     m_Colors:

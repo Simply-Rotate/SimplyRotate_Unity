@@ -3,7 +3,9 @@ guid: 177c6a54c3d212741ad7cdc22cd08604
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rotateBar: {instanceID: 0}
+  - VHSShader: {fileID: 2100000, guid: 31905e1a35377c04d882cae696fea42a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

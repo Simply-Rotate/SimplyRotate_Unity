@@ -10,7 +10,7 @@ public class ControlScript : MonoBehaviour
     public bool isMenu = false;
     private float totalDegrees = 0.0f;
     public Slider rotateBar;
-    private float speedUpFactor = 1.5f;
+    private float speedUpFactor = 2.0f;
     public bool canRotate = true;
     private Rigidbody2D rb;
     private Vector3 myDir;
@@ -18,6 +18,8 @@ public class ControlScript : MonoBehaviour
     public bool isInside = false;
     private float rotateFactor = 0.0f;
     private bool canSpeedUp = false;
+
+    public Material VHSShader;
 
     private void Start()
     {
@@ -71,6 +73,7 @@ public class ControlScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.Log(VHSShader.GetFloat("_ScanningLines"));
         /*float funny = Input.GetAxis("Vertical");*/
         float turn = Input.GetAxis("Horizontal");
         /*transform.Rotate(-funny * rotateSpeed, 0f, -turn * rotateSpeed);*/
@@ -112,8 +115,7 @@ public class ControlScript : MonoBehaviour
         }
         else if (!canSpeedUp)
         {
-            Time.timeScale = 1.0f;
-            Time.fixedDeltaTime = 0.02f;
+            ReturnToNormal();
         }
         
 
@@ -159,5 +161,17 @@ public class ControlScript : MonoBehaviour
     {
         Time.timeScale = speedUpFactor;
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        VHSShader.SetFloat("_ScanningLines", 5f);
+        VHSShader.SetFloat("_ScanningLinesAmount", 0.1f);
+        VHSShader.SetFloat("_StaticAmount", 0.2f);
+    }
+
+    private void ReturnToNormal()
+    {
+        Time.timeScale = 1.0f;
+        Time.fixedDeltaTime = 0.02f;
+        VHSShader.SetFloat("_ScanningLines", 1.25f);
+        VHSShader.SetFloat("_ScanningLinesAmount", 0.01f);
+        VHSShader.SetFloat("_StaticAmount", 0f);
     }
 }

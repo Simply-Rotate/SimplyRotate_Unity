@@ -361,6 +361,8 @@ MonoBehaviour:
   isMenu: 0
   rotateBar: {fileID: 1621200137}
   canRotate: 1
+  isInside: 0
+  VHSShader: {fileID: 2100000, guid: 31905e1a35377c04d882cae696fea42a, type: 2}
 --- !u!50 &254604097
 Rigidbody2D:
   serializedVersion: 4
