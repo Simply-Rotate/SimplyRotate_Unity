@@ -27,7 +27,7 @@ public class LaunchPadScript : MonoBehaviour
             particle.GetComponent<ParticleSystem>().Play();
             otherRB.AddForce(myUp * launchForce);
             mySource.clip = myClips[Random.Range(0, myClips.Length)];
-            mySource.pitch = Random.Range(0.5f, 0.75f);
+            mySource.pitch = Random.Range(0.85f, 1.0f);
             mySource.Play();
         }
     }
