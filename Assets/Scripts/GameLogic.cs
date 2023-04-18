@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameLogic : MonoBehaviour
 {
     [Header("Scene Settings")]
-    public float slowdownFactor = 0.05f;
+    private float slowdownFactor = 0.05f;
     public int totalScenes = 7;
     private float holdToRestart = 2.0f;
     [SerializeField] private AudioClip[] loseClips;
@@ -90,8 +90,6 @@ public class GameLogic : MonoBehaviour
                     }
                 }
             }
-
-
         }
         
     }
@@ -135,7 +133,6 @@ public class GameLogic : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().buildIndex < totalScenes)
                 {
-                    /*SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);*/
                     FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex + 1);
                 }
                 else
@@ -165,6 +162,7 @@ public class GameLogic : MonoBehaviour
                 canRestart = false;
                 winPanel.SetActive(true);
                 rotationManager.curRotation = myControl.GetRotationLeft();
+                DoSlowMotion();
                 StartCoroutine(CountDown(1.5f));
                 mySource.clip = winClips[Random.Range(0, winClips.Length)];
                 mySource.pitch = Random.Range(1.0f, 2.0f);

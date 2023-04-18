@@ -18,7 +18,7 @@ public class ControlScript : MonoBehaviour
     public bool isInside = false;
     private float rotateFactor = 0.0f;
     private bool canSpeedUp = false;
-
+    private bool hasTriggeredNormal = false;
     public Material VHSShader;
 
     private void Start()
@@ -73,7 +73,6 @@ public class ControlScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(VHSShader.GetFloat("_ScanningLines"));
         /*float funny = Input.GetAxis("Vertical");*/
         float turn = Input.GetAxis("Horizontal");
         /*transform.Rotate(-funny * rotateSpeed, 0f, -turn * rotateSpeed);*/
@@ -112,10 +111,12 @@ public class ControlScript : MonoBehaviour
         if (canSpeedUp)
         {
             DoSpeedUp();
+            hasTriggeredNormal = false;
         }
-        else if (!canSpeedUp)
+        else if (!canSpeedUp && !hasTriggeredNormal)
         {
             ReturnToNormal();
+            hasTriggeredNormal = true;
         }
         
 
@@ -130,26 +131,6 @@ public class ControlScript : MonoBehaviour
         {
             SceneManager.LoadScene(17);
         }
-        /*if (Input.GetKey(KeyCode.Alpha2))
-        {
-            FindObjectOfType<RotationManager>().tag = "OldRotManager";
-            SceneManager.LoadScene(2);
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            FindObjectOfType<RotationManager>().tag = "OldRotManager";
-            SceneManager.LoadScene(5);
-        }
-        if (Input.GetKey(KeyCode.Alpha4))
-        {
-            FindObjectOfType<RotationManager>().tag = "OldRotManager";
-            SceneManager.LoadScene(7);
-        }
-        if (Input.GetKey(KeyCode.Alpha5))
-        {
-            FindObjectOfType<RotationManager>().tag = "OldRotManager";
-            SceneManager.LoadScene(10);
-        }*/
     }
 
     public float GetRotationLeft()
