@@ -1854,7 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7941647498346651346, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: numOfLevels
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7941647498346651346, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: levelColor.a
