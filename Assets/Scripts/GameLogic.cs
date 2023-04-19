@@ -12,6 +12,7 @@ public class GameLogic : MonoBehaviour
     private float holdToRestart = 2.0f;
     [SerializeField] private AudioClip[] loseClips;
     [SerializeField] private AudioClip[] winClips;
+    [SerializeField] private float minRequired = 0.0f;
     private AudioSource mySource;
 
     private GameObject restartGUI;
@@ -29,6 +30,9 @@ public class GameLogic : MonoBehaviour
     private bool curLevelFin = false;
     private GameObject restartIcon;
     private float startingRotationAmount = 0.0f;
+    private GameObject warningBar;
+    private bool isFlashing;
+    private bool isFadingIn = true;
 
     /*[Header("Secret Settings DO NOT CHANGE!!!")]
     public bool canTransition = false;
@@ -48,6 +52,7 @@ public class GameLogic : MonoBehaviour
             losePanel = GameObject.FindGameObjectWithTag("LosePanel");
             restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
             restartIcon = GameObject.FindGameObjectWithTag("RestartIcon");
+            warningBar = GameObject.FindGameObjectWithTag("WarningBar");
             mySource = GetComponent<AudioSource>();
             if (GameObject.FindGameObjectWithTag("RestartBar") != null)
             {
@@ -76,6 +81,14 @@ public class GameLogic : MonoBehaviour
             winPanel.SetActive(false);
             losePanel.SetActive(false);
             rotationManager.previousRotations.Push(rotationManager.curRotation);
+            if(rotationManager.curRotation < minRequired)
+            {
+                isFlashing = true;
+            }
+            else
+            {
+                isFlashing = false;
+            }
             Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
             if (!mySettings.GetCanShowHint())
@@ -165,7 +178,32 @@ public class GameLogic : MonoBehaviour
                 }
             }
         }
-        
+        if(isFlashing && isFadingIn)
+        {
+            var tempColor = warningBar.GetComponent<Image>().color;         
+            tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 1, Time.deltaTime);
+            warningBar.GetComponent<Image>().color = tempColor;
+            if (tempColor.a > 0.9)
+            {
+                isFadingIn = false;
+            }
+        }
+        else if (isFlashing)
+        {
+            var tempColor = warningBar.GetComponent<Image>().color;
+            tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 0, Time.deltaTime);
+            warningBar.GetComponent<Image>().color = tempColor;
+            if(tempColor.a < 0.1)
+            {
+                isFadingIn = true;
+            }
+        }
+        else
+        {
+            var tempColor = warningBar.GetComponent<Image>().color;
+            tempColor.a = 0;
+            warningBar.GetComponent<Image>().color = tempColor;
+        }
     }
 
     public bool GetLevelFinished()

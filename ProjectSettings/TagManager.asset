@@ -17,6 +17,7 @@ TagManager:
   - LevelRotateAmount
   - Respawner
   - TimerUI
+  - WarningBar
   layers:
   - Default
   - TransparentFX
