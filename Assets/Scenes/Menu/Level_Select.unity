@@ -699,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1689195361323971505, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 0
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 1689195361323971506, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
       propertyPath: m_AnchorMax.y
