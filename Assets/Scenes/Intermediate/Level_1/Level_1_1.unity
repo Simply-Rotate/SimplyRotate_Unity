@@ -1924,15 +1924,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7941647498346651346, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: levelColor.b
-      value: 0.4
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 7941647498346651346, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: levelColor.g
-      value: 1
+      value: 0.5882353
       objectReference: {fileID: 0}
     - target: {fileID: 7941647498346651346, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: levelColor.r
-      value: 0.9882353
+      value: 0.39215687
       objectReference: {fileID: 0}
     - target: {fileID: 8660206461874012795, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: m_Pivot.x
