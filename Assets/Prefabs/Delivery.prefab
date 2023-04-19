@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1828883919289364317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.42, y: 1.4, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4620104640562619746}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathParticles: {fileID: 2349277190076858639, guid: cc203d17ee17d7245bbaf67a5f1678ec, type: 3}
   colParticles: {fileID: 2349277190076858639, guid: 76110d13aee3113498b19d9df56f2e8e, type: 3}
+  canComeBack: 0
 --- !u!82 &8537198616780021643
 AudioSource:
   m_ObjectHideFlags: 0
