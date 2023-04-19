@@ -16,7 +16,7 @@ public class StartEntityBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && iconType == 0)
         {
-            FindObjectOfType<LevelLoader>().LoadThisLevel(1);
+            FindObjectOfType<LevelLoader>().LoadThisLevel(2);
         }
         else if (other.gameObject.tag == "Player" && iconType == 1)
         {
