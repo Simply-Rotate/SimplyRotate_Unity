@@ -129,7 +129,7 @@ public class ControlScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Alpha2))
         {
-            SceneManager.LoadScene(22);
+            SceneManager.LoadScene(1);
         }
     }
 

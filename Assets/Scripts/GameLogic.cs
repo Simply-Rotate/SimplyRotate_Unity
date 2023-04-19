@@ -75,7 +75,8 @@ public class GameLogic : MonoBehaviour
             restartGUI.SetActive(false);
             winPanel.SetActive(false);
             losePanel.SetActive(false);
-
+            rotationManager.previousRotations.Push(rotationManager.curRotation);
+            Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
             Debug.Log(mySettings.GetCanShowHint());
             if (!mySettings.GetCanShowHint())
@@ -110,16 +111,35 @@ public class GameLogic : MonoBehaviour
                     if (holdTimer < 0)
                     {
                         Debug.Log("Starting at beginning");
-                        
+                        rotationManager.previousRotations.Clear();
                         FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);
                     }
                 }
                 if (Input.GetKeyUp(KeyCode.R))
                 {
+                    if (rotationManager.startLevelIndex == SceneManager.GetActiveScene().buildIndex || holdTimer > holdToRestart/2) {
+                        restartGUI.SetActive(false);
+                        rotationManager.curRotation = startingRotationAmount;
+                        if (rotationManager.startLevelIndex == SceneManager.GetActiveScene().buildIndex)
+                        {
+                            rotationManager.previousRotations.Clear();
+                        }
+                        else
+                        {
+                            rotationManager.previousRotations.Pop();
+                        }
+                        FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
+                    }
+                    else
+                    {
+                        restartGUI.SetActive(false);
+                        Debug.Log("Hoop" + rotationManager.previousRotations.Peek());
+                        rotationManager.previousRotations.Pop();
+                        rotationManager.curRotation = rotationManager.previousRotations.Pop();
+                        FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex - 1);
+                    }
+                    //int numStages = SceneManager.GetActiveScene().buildIndex - rotationManager.startLevelIndex;
                     //Time.timeScale = 1.0f;
-                    restartGUI.SetActive(false);
-                    rotationManager.curRotation = startingRotationAmount;
-                    FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
                 }
             }
             
