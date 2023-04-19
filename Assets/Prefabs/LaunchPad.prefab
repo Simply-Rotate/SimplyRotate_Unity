@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62760154427acc140ad2d216d58c7ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 5000
+  launchForce: 4000
   particlePrefab: {fileID: 2349277190076858639, guid: 4f6b594fd8dc76c44a605a78c4b7aea5, type: 3}
   myClips:
   - {fileID: 8300000, guid: 7284c6a307712f2408e8e5b1d8846bee, type: 3}
