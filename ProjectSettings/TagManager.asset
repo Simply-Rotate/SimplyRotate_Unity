@@ -16,6 +16,7 @@ TagManager:
   - RestartIcon
   - LevelRotateAmount
   - Respawner
+  - TimerUI
   layers:
   - Default
   - TransparentFX
