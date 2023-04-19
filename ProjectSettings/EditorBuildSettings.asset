@@ -93,6 +93,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Advanced/Level_1/Level_1_0.unity
     guid: 674a4c1871af04ffda4725621688f28b
   - enabled: 1
-    path: Assets/Scenes/Advanced/Beginner_End.unity
+    path: Assets/Scenes/Advanced/Advanced_End.unity
     guid: 21c945507382b654eb90e092e66a6bdc
   m_configObjects: {}
