@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour
 {
     [Header("Scene Settings")]
     private float slowdownFactor = 0.05f;
-    public int totalScenes = 7;
+    public int totalScenes = 22;
     private float holdToRestart = 2.0f;
     [SerializeField] private AudioClip[] loseClips;
     [SerializeField] private AudioClip[] winClips;
@@ -78,7 +78,6 @@ public class GameLogic : MonoBehaviour
             rotationManager.previousRotations.Push(rotationManager.curRotation);
             Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
-            Debug.Log(mySettings.GetCanShowHint());
             if (!mySettings.GetCanShowHint())
             {
                 GameObject[] hints = GameObject.FindGameObjectsWithTag("LevelRotateAmount");
@@ -90,6 +89,11 @@ public class GameLogic : MonoBehaviour
                         hint.SetActive(false);
                     }
                 }
+            }
+            if (!mySettings.GetIsSpeedRun())
+            {
+                GameObject.FindGameObjectWithTag("TimerUI").SetActive(false);
+                FindObjectOfType<TimerBehavior>().gameObject.SetActive(false);
             }
         }
         
