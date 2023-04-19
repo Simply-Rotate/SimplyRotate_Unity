@@ -48,6 +48,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Beginner/Level_5/Level_5_2.unity
     guid: d74cfd5802a064948b0f9fa1a48afe22
   - enabled: 1
+    path: Assets/Scenes/Beginner/Level_6/Level_6_0.unity
+    guid: cb06740e270b0c646b8e49911c35f8b3
+  - enabled: 1
+    path: Assets/Scenes/Beginner/Level_6/Level_6_1.unity
+    guid: 9d18dc7f0c0c24b67bd21524d97834b8
+  - enabled: 1
     path: Assets/Scenes/Intermediate/Level_2_1.unity
     guid: a0ed0887838ac7549aacaa0d01dacff9
   - enabled: 1
