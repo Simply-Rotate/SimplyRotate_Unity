@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour
 {
     [Header("Scene Settings")]
     private float slowdownFactor = 0.05f;
-    public int totalScenes = 22;
+    public int totalScenes;
     private float holdToRestart = 2.0f;
     [SerializeField] private AudioClip[] loseClips;
     [SerializeField] private AudioClip[] winClips;
@@ -27,12 +27,15 @@ public class GameLogic : MonoBehaviour
     private bool isFinishCalled = false;
     private ControlScript myControl;
     private bool canRestart = true;
+    private bool canWin = true;
     private bool curLevelFin = false;
     private GameObject restartIcon;
     private float startingRotationAmount = 0.0f;
     private GameObject warningBar;
     private bool isFlashing;
     private bool isFadingIn = true;
+    private TimerBehavior timer;
+    private StatsBehavior myStats;
 
     /*[Header("Secret Settings DO NOT CHANGE!!!")]
     public bool canTransition = false;
@@ -53,6 +56,8 @@ public class GameLogic : MonoBehaviour
             restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
             restartIcon = GameObject.FindGameObjectWithTag("RestartIcon");
             warningBar = GameObject.FindGameObjectWithTag("WarningBar");
+            myStats = FindObjectOfType<StatsBehavior>();
+            timer = FindObjectOfType<TimerBehavior>();
             mySource = GetComponent<AudioSource>();
             if (GameObject.FindGameObjectWithTag("RestartBar") != null)
             {
@@ -91,6 +96,8 @@ public class GameLogic : MonoBehaviour
             }
             Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
+            Debug.Log(mySettings.GetIsSpeedRun());
+            Debug.Log(mySettings.GetCanShowHint());
             if (!mySettings.GetCanShowHint())
             {
                 GameObject[] hints = GameObject.FindGameObjectsWithTag("LevelRotateAmount");
@@ -106,21 +113,28 @@ public class GameLogic : MonoBehaviour
             if (!mySettings.GetIsSpeedRun())
             {
                 GameObject.FindGameObjectWithTag("TimerUI").SetActive(false);
-                FindObjectOfType<TimerBehavior>().gameObject.SetActive(false);
+                if (timer != null)
+                {
+                    timer.gameObject.SetActive(false);
+                }
             }
+            else if (mySettings.GetIsSpeedRun())
+            {
+                FindObjectOfType<TimerBehavior>().canIncreaseTime = true;
+            }
+
         }
         
     }
 
     void Update()
     {
-        if (!myControl.isMenu)
-        {
+        if (!myControl.isMenu) 
+        { 
             if (canRestart)
             {
                 if (Input.GetKey(KeyCode.R))
                 {
-                    //Time.timeScale = 1.0f;
                     restartGUI.SetActive(true);
                     restartIcon.SetActive(false);
                     holdTimer -= Time.deltaTime;
@@ -134,6 +148,11 @@ public class GameLogic : MonoBehaviour
                 }
                 if (Input.GetKeyUp(KeyCode.R))
                 {
+                    canWin = false;
+                    if (myStats != null)
+                    {
+                        myStats.AddRestart();
+                    }
                     if (rotationManager.startLevelIndex == SceneManager.GetActiveScene().buildIndex || holdTimer > holdToRestart/2) {
                         restartGUI.SetActive(false);
                         rotationManager.curRotation = startingRotationAmount;
@@ -155,8 +174,6 @@ public class GameLogic : MonoBehaviour
                         rotationManager.curRotation = rotationManager.previousRotations.Pop();
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex - 1);
                     }
-                    //int numStages = SceneManager.GetActiveScene().buildIndex - rotationManager.startLevelIndex;
-                    //Time.timeScale = 1.0f;
                 }
             }
             
@@ -177,33 +194,34 @@ public class GameLogic : MonoBehaviour
                     FindObjectOfType<LevelLoader>().LoadThisLevel(0);
                 }
             }
-        }
-        if(isFlashing && isFadingIn)
-        {
-            var tempColor = warningBar.GetComponent<Image>().color;         
-            tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 1, Time.deltaTime);
-            warningBar.GetComponent<Image>().color = tempColor;
-            if (tempColor.a > 0.9)
+            if (isFlashing && isFadingIn)
             {
-                isFadingIn = false;
+                var tempColor = warningBar.GetComponent<Image>().color;
+                tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 1, Time.deltaTime);
+                warningBar.GetComponent<Image>().color = tempColor;
+                if (tempColor.a > 0.9)
+                {
+                    isFadingIn = false;
+                }
+            }
+            else if (isFlashing)
+            {
+                var tempColor = warningBar.GetComponent<Image>().color;
+                tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 0, Time.deltaTime);
+                warningBar.GetComponent<Image>().color = tempColor;
+                if (tempColor.a < 0.1)
+                {
+                    isFadingIn = true;
+                }
+            }
+            else
+            {
+                var tempColor = warningBar.GetComponent<Image>().color;
+                tempColor.a = 0;
+                warningBar.GetComponent<Image>().color = tempColor;
             }
         }
-        else if (isFlashing)
-        {
-            var tempColor = warningBar.GetComponent<Image>().color;
-            tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 0, Time.deltaTime);
-            warningBar.GetComponent<Image>().color = tempColor;
-            if(tempColor.a < 0.1)
-            {
-                isFadingIn = true;
-            }
-        }
-        else
-        {
-            var tempColor = warningBar.GetComponent<Image>().color;
-            tempColor.a = 0;
-            warningBar.GetComponent<Image>().color = tempColor;
-        }
+        
     }
 
     public bool GetLevelFinished()
@@ -213,31 +231,39 @@ public class GameLogic : MonoBehaviour
 
     public void FinishLevel(bool winStatus)
     {
-        isWin = winStatus;
-        myControl.canRotate = false;
-        if (!isFinishCalled)
+        if (canWin)
         {
-            isFinishCalled = true;
-            if (winStatus)
+            if (FindObjectOfType<TimerBehavior>() != null)
             {
-                curLevelFin = true;
-                canRestart = false;
-                winPanel.SetActive(true);
-                rotationManager.curRotation = myControl.GetRotationLeft();
-                DoSlowMotion();
-                StartCoroutine(CountDown(1.5f));
-                mySource.clip = winClips[Random.Range(0, winClips.Length)];
-                mySource.pitch = Random.Range(1.0f, 2.0f);
-                mySource.Play();
+                FindObjectOfType<TimerBehavior>().canIncreaseTime = false;
             }
-            else
+            isWin = winStatus;
+            myControl.canRotate = false;
+            if (!isFinishCalled)
             {
-                losePanel.SetActive(true);
-                mySource.clip = loseClips[Random.Range(0, loseClips.Length)];
-                mySource.pitch = 0.85f;
-                mySource.Play();
+                isFinishCalled = true;
+                if (winStatus)
+                {
+                    curLevelFin = true;
+                    canRestart = false;
+                    winPanel.SetActive(true);
+                    rotationManager.curRotation = myControl.GetRotationLeft();
+                    DoSlowMotion();
+                    StartCoroutine(CountDown(1.5f));
+                    mySource.clip = winClips[Random.Range(0, winClips.Length)];
+                    mySource.pitch = Random.Range(1.0f, 2.0f);
+                    mySource.Play();
+                }
+                else
+                {
+                    losePanel.SetActive(true);
+                    mySource.clip = loseClips[Random.Range(0, loseClips.Length)];
+                    mySource.pitch = 0.85f;
+                    mySource.Play();
+                }
             }
         }
+        
     }
 
     public void DoSlowMotion()

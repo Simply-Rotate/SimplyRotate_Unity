@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class RotationManager : MonoBehaviour
 {
@@ -16,6 +18,15 @@ public class RotationManager : MonoBehaviour
         foreach (GameObject rot in rotMangers)
         {
             Destroy(rot);
+        }
+    }
+
+    private void Update()
+    {
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == 0 || sceneIndex == 1)
+        {
+            Destroy(gameObject);
         }
     }
 

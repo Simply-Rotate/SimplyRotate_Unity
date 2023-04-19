@@ -23,11 +23,6 @@ public class GameSettings : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Update()
-    {
-        Debug.Log(canShowHint);
-    }
-
     public void ShowHint(bool flag)
     {
         canShowHint = flag;
