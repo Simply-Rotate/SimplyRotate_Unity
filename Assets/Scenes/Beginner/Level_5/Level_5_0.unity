@@ -1730,7 +1730,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7373640588564058215, guid: fa7c9e1edc1b61c428facb3e8cae8b1b, type: 3}
       propertyPath: launchForce
-      value: 10000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 2026500224074931815, guid: fa7c9e1edc1b61c428facb3e8cae8b1b, type: 3}
       propertyPath: m_SortingOrder
