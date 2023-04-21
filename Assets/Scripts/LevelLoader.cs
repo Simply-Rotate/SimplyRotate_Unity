@@ -32,7 +32,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadThisLevel(int sceneInd)
     {
-        if (rotationManager != null) rotationManager.tag = "OldRotManager";
+        if (rotationManager != null) rotationManager.gameObject.tag = "OldRotManager";
         StartCoroutine(LoadLevel(sceneInd));
     }
 
@@ -43,9 +43,9 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(levelIndex);
     }
 
-    public void LoadThisLevelByName(int lvl)
+    /*public void LoadThisLevelByName(int lvl)
     {
-        if (rotationManager != null) rotationManager.tag = "OldRotManager";
+        if (rotationManager != null) rotationManager.gameObject.tag = "OldRotManager";
         StartCoroutine(LoadLevelByName("Level_" + lvl.ToString()));
     }
 
@@ -54,5 +54,5 @@ public class LevelLoader : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSecondsRealtime(transitionTime);
         SceneManager.LoadScene(sceneName);
-    }
+    }*/
 }
