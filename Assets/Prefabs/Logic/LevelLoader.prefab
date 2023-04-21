@@ -62,7 +62,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &743121053385476696
 MonoBehaviour:
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 743121053385476700}
   transitionTime: 1
+  lvl: 0
 --- !u!1 &8474102951698618975
 GameObject:
   m_ObjectHideFlags: 0
