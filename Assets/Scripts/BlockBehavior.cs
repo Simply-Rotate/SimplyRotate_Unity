@@ -14,7 +14,19 @@ public class BlockBehavior : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         mySource.pitch = Random.Range(0.75f, 1.0f);
-        /*mySource.volume = myRb.velocity.sqrMagnitude / 80f;*/
+        if (collision.gameObject.tag != "Level")
+        {
+            Rigidbody2D otherRb = collision.gameObject.GetComponent<Rigidbody2D>();
+            if (otherRb != null)
+            {
+                mySource.volume = (myRb.velocity.sqrMagnitude + otherRb.velocity.sqrMagnitude) / 10f;
+            }
+        }
+        else
+        {
+            mySource.volume = myRb.velocity.sqrMagnitude + 0.5f;
+        }
+        
         mySource.Play();
     }
 }
