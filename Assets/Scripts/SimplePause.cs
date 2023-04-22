@@ -38,6 +38,6 @@ public class SimplePause : MonoBehaviour
 
     public void QuitToMenu()
     {
-        FindObjectOfType<LevelLoader>().LoadThisLevel(0);
+        SceneManager.LoadScene(0);
     }
 }
