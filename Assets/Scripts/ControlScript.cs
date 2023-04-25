@@ -118,10 +118,10 @@ public class ControlScript : MonoBehaviour
             ReturnToNormal();
             hasTriggeredNormal = true;
         }
-        
+
 
         // debugging stuff
-        if (Input.GetKey(KeyCode.Alpha1))
+        /*if (Input.GetKey(KeyCode.Alpha1))
         {
             FindObjectOfType<RotationManager>().tag = "OldRotManager";
             SceneManager.LoadScene(0);
@@ -130,7 +130,7 @@ public class ControlScript : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha2))
         {
             SceneManager.LoadScene(1);
-        }
+        }*/
     }
 
     public float GetRotationLeft()

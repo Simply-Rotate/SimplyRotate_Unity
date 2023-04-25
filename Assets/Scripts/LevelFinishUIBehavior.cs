@@ -20,7 +20,14 @@ public class LevelFinishUIBehavior : MonoBehaviour
             totalRestarts = FindObjectOfType<StatsBehavior>().GetNumOfRestarts();
         }
 
-        myTimer.text = totalTime.ToString("f2");
+        if (totalTime <= 0f)
+        {
+            myTimer.text = "N/A";
+        }
+        else
+        {
+            myTimer.text = totalTime.ToString("f2");
+        }
         myStats.text = totalRestarts.ToString();
     }
 }

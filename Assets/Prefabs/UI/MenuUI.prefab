@@ -398,8 +398,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000015259, y: -33.328564}
-  m_SizeDelta: {x: 928.5168, y: 209.1071}
+  m_AnchoredPosition: {x: -0.000015259, y: -0.000017166}
+  m_SizeDelta: {x: 928.5168, y: 172.6914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3737537540988917674
 CanvasRenderer:
@@ -445,14 +445,10 @@ MonoBehaviour:
   m_Text: 'Press ''A'' or ''D'' or the left and right arrow keys to rotate.
 
 
-    Press
-    ''R'' to restart at the current level.
-
-    Hold ''R'' to restart the entire
-    stage.
-
-
-    There will be some sliders for settings coming soon :p'
+    Tap
+    ''R'' to restart current stage. Hold ''R'' to fill up the restart bar more than
+    half-way to go back one stage. Fill up entire restart bar to start from first
+    stage.'
 --- !u!1 &3078626947029241245
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +787,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enable Speed Run Mode
+  m_Text: Enable Time Frenzy Mode
 --- !u!1 &6152579004246147959
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,7 +867,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Options
+  m_Text: Options & Controls
 --- !u!1 &6956386561864885548
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,7 +1066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -191}
+  m_AnchoredPosition: {x: 0, y: -131}
   m_SizeDelta: {x: 374.81, y: 46.8516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6729676441987843663
@@ -1171,7 +1167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000030518, y: -262}
+  m_AnchoredPosition: {x: 0.00004465, y: -207}
   m_SizeDelta: {x: 374.81, y: 46.8516}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3394237101669284724

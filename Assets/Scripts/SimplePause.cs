@@ -52,8 +52,15 @@ public class SimplePause : MonoBehaviour
         }
     }
 
+    public void LevelSelect()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(1);
+    }
+
     public void QuitToMenu()
     {
+        FindObjectOfType<RotationManager>().tag = "OldRotManager";
         SceneManager.LoadScene(0);
     }
 }
