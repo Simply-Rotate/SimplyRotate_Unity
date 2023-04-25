@@ -272,6 +272,11 @@ public class GameLogic : MonoBehaviour
         Time.fixedDeltaTime = Time.timeScale * 0.02f;
     }
 
+    public bool GetIsLevelFinished()
+    {
+        return isLevelFinished;
+    }
+
     IEnumerator CountDown(float time)
     {
         yield return new WaitForSecondsRealtime(time);

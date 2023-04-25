@@ -7,6 +7,14 @@ public class SimplePause : MonoBehaviour
 {
     public static bool isPaused = false;
     public GameObject pausePanel;
+    private TimerBehavior myTimer;
+    private GameLogic myLogic;
+    private void Start()
+    {
+        myTimer = FindObjectOfType<TimerBehavior>();
+        myLogic = FindObjectOfType<GameLogic>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -27,6 +35,10 @@ public class SimplePause : MonoBehaviour
         pausePanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        if (myTimer != null && myLogic.GetIsLevelFinished())
+        {
+            myTimer.canIncreaseTime = true;
+        }
     }
 
     public void Pause()
@@ -34,6 +46,10 @@ public class SimplePause : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+        if (myTimer != null)
+        {
+            myTimer.canIncreaseTime = false;
+        }
     }
 
     public void QuitToMenu()
