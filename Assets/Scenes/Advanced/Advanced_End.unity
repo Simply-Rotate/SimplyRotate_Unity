@@ -571,5 +571,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 40.035
       objectReference: {fileID: 0}
+    - target: {fileID: 7397262419487325486, guid: 35fd6f3be40de874889b826c960fc7a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 20122447}
+    - target: {fileID: 7397262419487325486, guid: 35fd6f3be40de874889b826c960fc7a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadThisLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7397262419487325486, guid: 35fd6f3be40de874889b826c960fc7a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35fd6f3be40de874889b826c960fc7a0, type: 3}
