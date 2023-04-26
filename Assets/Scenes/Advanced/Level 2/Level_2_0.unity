@@ -2926,11 +2926,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
       propertyPath: curRotation
-      value: 800
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
       propertyPath: totalRotation
-      value: 800
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
       propertyPath: m_RootOrder
