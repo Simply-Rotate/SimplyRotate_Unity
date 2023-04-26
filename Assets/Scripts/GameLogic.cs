@@ -176,12 +176,6 @@ public class GameLogic : MonoBehaviour
                     }
                 }
             }
-            
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                Application.Quit();
-            }
-
 
             if (isLevelFinished && isWin)
             {
