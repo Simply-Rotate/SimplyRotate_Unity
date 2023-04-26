@@ -140,6 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathParticles: {fileID: 2349277190076858639, guid: cc203d17ee17d7245bbaf67a5f1678ec, type: 3}
   colParticles: {fileID: 2349277190076858639, guid: 76110d13aee3113498b19d9df56f2e8e, type: 3}
+  powerUp: {fileID: 8300000, guid: 9cb388da246328644a23804ed5951e4b, type: 3}
+  collision: {fileID: 8300000, guid: 792fdd2956445004b8d35ca9be64c0e4, type: 3}
   canComeBack: 0
 --- !u!82 &8537198616780021643
 AudioSource:

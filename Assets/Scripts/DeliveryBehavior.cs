@@ -6,6 +6,8 @@ public class DeliveryBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private GameObject colParticles;
+    [SerializeField] private AudioClip powerUp;
+    [SerializeField] private AudioClip collision;
     private Rigidbody2D myRb;
     private AudioSource mySource;
     private bool canPlaySound = false;
@@ -44,6 +46,7 @@ public class DeliveryBehavior : MonoBehaviour
             particles.GetComponent<ParticleSystem>().Play();
             if (canPlaySound)
             {
+                mySource.clip = collision;
                 mySource.pitch = Random.Range(0.75f, 1.0f);
                 mySource.volume = myRb.velocity.sqrMagnitude / 80f;
                 mySource.Play();
@@ -58,9 +61,18 @@ public class DeliveryBehavior : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Respawner")
+        /*if (other.gameObject.tag == "Respawner")
         {
             this.transform.position = new Vector3(0, 12, 0);
+        }
+        else */
+        
+        if (other.gameObject.tag == "Powerup")
+        {
+            mySource.clip = powerUp;
+            mySource.pitch = Random.Range(0.4f, 0.7f);
+            mySource.volume = 0.7f;
+            mySource.Play();
         }
     }
 
