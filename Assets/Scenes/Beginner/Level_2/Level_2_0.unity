@@ -383,71 +383,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 3
---- !u!1001 &440555197
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: curRotation
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: totalRotation
-      value: 220
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.3998819
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.6056194
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.21727194
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7912477307737228860, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
-      propertyPath: m_Name
-      value: RotationManager
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
 --- !u!1 &465496582
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 743121054584653974, guid: 5f3405a01070da24e9eb7a78390b4915, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 743121054584653974, guid: 5f3405a01070da24e9eb7a78390b4915, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1548,6 +1483,14 @@ PrefabInstance:
       propertyPath: panel
       value: 
       objectReference: {fileID: 8660206463029179536}
+    - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
+      propertyPath: curLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
+      propertyPath: isStartingLevel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
 --- !u!1001 &8660206463029179535

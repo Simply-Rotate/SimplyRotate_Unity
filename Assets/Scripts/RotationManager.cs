@@ -6,19 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class RotationManager : MonoBehaviour
 {
-    public float totalRotation = 200.0f;
+    /*public float totalRotation = 200.0f;*/
     public float curRotation = 200.0f;
     public int startLevelIndex = -1;
     public Stack<float> previousRotations = new Stack<float>();
+    public List<int> levelRotationAmount;
+    private static RotationManager instance = null;
+    public static RotationManager Instance { get { return Instance; } }
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        
-        List<GameObject> rotMangers = new List<GameObject>(GameObject.FindGameObjectsWithTag("OldRotManager"));
-        foreach (GameObject rot in rotMangers)
+        if (instance != null && instance != this)
         {
-            Destroy(rot);
+            Destroy(this);
+            return;
         }
+        else
+        {
+            instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -33,10 +40,8 @@ public class RotationManager : MonoBehaviour
     public void AddRotation(float amount)
     {
         curRotation += amount;
-        if (curRotation > totalRotation)
-        {
-            curRotation = totalRotation;
-        }
+        float totalRotation = levelRotationAmount[FindObjectOfType<GameLogic>().curLevel];
+        if (curRotation > totalRotation) curRotation = totalRotation;
         FindObjectOfType<ControlScript>().SetRotateAmount(curRotation, totalRotation);
     }
 }

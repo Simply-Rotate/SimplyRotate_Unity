@@ -12,8 +12,6 @@ public class ControlScript : MonoBehaviour
     public Slider rotateBar;
     private float speedUpFactor = 2.0f;
     public bool canRotate = true;
-    private Rigidbody2D rb;
-    private Vector3 myDir;
     private BoxCollider2D myCol;
     public bool isInside = false;
     private float rotateFactor = 0.0f;
@@ -21,42 +19,11 @@ public class ControlScript : MonoBehaviour
     private bool hasTriggeredNormal = false;
     public Material VHSShader;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        myCol = GetComponent<BoxCollider2D>();
-        Debug.Log(myCol);
-    }
-
     public void SetRotateAmount(float curAmount, float maxAmount)
     {
         totalDegrees = curAmount;
         rotateBar.maxValue = maxAmount;
         rotateBar.value = curAmount;
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        other.gameObject.transform.SetParent(null, true);
-        
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Vector2 prevVelo = other.gameObject.GetComponent<Rigidbody2D>().velocity;
-        if (other.gameObject.tag != "Player")
-        {
-            other.gameObject.transform.SetParent(transform, true);
-        }
-        else
-        {
-            if (other.gameObject.GetComponent<DeliveryBehavior>().canComeBack)
-            {
-                other.gameObject.transform.SetParent(transform, true);
-                isInside = true;
-            }
-        }
-        other.gameObject.GetComponent<Rigidbody2D>().velocity = prevVelo + GetComponent<Rigidbody2D>().velocity;
     }
 
     private void Update()

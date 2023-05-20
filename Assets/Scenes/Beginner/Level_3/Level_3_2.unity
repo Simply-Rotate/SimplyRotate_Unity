@@ -1732,6 +1732,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8660206463029179536}
     - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
+      propertyPath: curLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
       propertyPath: minRequired
       value: 100
       objectReference: {fileID: 0}

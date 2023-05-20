@@ -138,6 +138,26 @@ PrefabInstance:
       propertyPath: totalRotation
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
+      propertyPath: levelRotationAmount.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
+      propertyPath: levelRotationAmount.Array.data[0]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
+      propertyPath: levelRotationAmount.Array.data[1]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
+      propertyPath: levelRotationAmount.Array.data[2]
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 985486702575317797, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
+      propertyPath: levelRotationAmount.Array.data[3]
+      value: 1400
+      objectReference: {fileID: 0}
     - target: {fileID: 2695885438438238890, guid: a9277173cd32f3d4899a7c06f3ad113c, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -1799,6 +1819,10 @@ PrefabInstance:
       propertyPath: restartBar
       value: 
       objectReference: {fileID: 8660206463029179537}
+    - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
+      propertyPath: isStartingLevel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
 --- !u!1001 &8660206463029179535

@@ -6,18 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
-    [Header("Scene Settings")]
-    private float slowdownFactor = 0.05f;
+    [Header("Level Settings")]
     public int totalScenes;
+    public int curLevel = 0;
+    [SerializeField] private bool isStartingLevel = false;
+    [SerializeField] private float minRequired = 0.0f;
+
+    private float slowdownFactor = 0.05f;
     private float holdToRestart = 2.0f;
+
+    [Header("Audio Settings")]
     [SerializeField] private AudioClip[] loseClips;
     [SerializeField] private AudioClip[] winClips;
-    [SerializeField] private float minRequired = 0.0f;
-    private AudioSource mySource;
+    
 
+    private AudioSource mySource;
     private GameObject restartGUI;
     private Slider restartBar;
-
     private float holdTimer = 0.0f;
     private GameObject winPanel;
     private GameObject losePanel;
@@ -36,10 +41,6 @@ public class GameLogic : MonoBehaviour
     private bool isFadingIn = true;
     private TimerBehavior timer;
     private StatsBehavior myStats;
-
-    /*[Header("Secret Settings DO NOT CHANGE!!!")]
-    public bool canTransition = false;
-    public bool needsRestart = false;*/
 
     private void Start()
     {
@@ -68,23 +69,29 @@ public class GameLogic : MonoBehaviour
             holdTimer = holdToRestart;
 
             GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
-            if (tmp == null)
-            {
-                tmp = GameObject.FindGameObjectWithTag("OldRotManager");
-            }
             if (tmp != null)
             {
                 rotationManager = tmp.GetComponent<RotationManager>();
-                startingRotationAmount = rotationManager.curRotation;
-                if (rotationManager.startLevelIndex == -1)
+                
+                if (isStartingLevel)
                 {
+                    rotationManager.previousRotations.Clear();
                     rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
+                    rotationManager.curRotation = rotationManager.levelRotationAmount[curLevel];
+                    myControl.SetRotateAmount(rotationManager.levelRotationAmount[curLevel], rotationManager.levelRotationAmount[curLevel]);
                 }
+                else
+                {
+                    myControl.SetRotateAmount(rotationManager.curRotation, rotationManager.levelRotationAmount[curLevel]);
+                }
+                startingRotationAmount = rotationManager.curRotation;
             }
-            myControl.SetRotateAmount(rotationManager.curRotation, rotationManager.totalRotation);
+            
+
             restartGUI.SetActive(false);
             winPanel.SetActive(false);
             losePanel.SetActive(false);
+
             rotationManager.previousRotations.Push(rotationManager.curRotation);
             if(rotationManager.curRotation < minRequired)
             {
@@ -94,6 +101,7 @@ public class GameLogic : MonoBehaviour
             {
                 isFlashing = false;
             }
+
             Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
             Debug.Log(mySettings.GetIsSpeedRun());
@@ -141,6 +149,10 @@ public class GameLogic : MonoBehaviour
                     restartBar.value = restartBar.maxValue - holdTimer;
                     if (holdTimer < 0)
                     {
+                        if (myStats != null)
+                        {
+                            myStats.AddRestart();
+                        }
                         Debug.Log("Starting at beginning");
                         rotationManager.previousRotations.Clear();
                         FindObjectOfType<LevelLoader>().LoadThisLevel(rotationManager.startLevelIndex);

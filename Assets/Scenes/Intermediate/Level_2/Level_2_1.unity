@@ -1168,6 +1168,10 @@ PrefabInstance:
       value: GameController
       objectReference: {fileID: 0}
     - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
+      propertyPath: curLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7678309406260780115, guid: 521d7c86a70b61641a86410c073efa50, type: 3}
       propertyPath: minRequired
       value: 290
       objectReference: {fileID: 0}

@@ -15,10 +15,6 @@ public class LevelLoader : MonoBehaviour
     private void Start()
     {
         GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
-        if (tmp == null)
-        {
-            tmp = GameObject.FindGameObjectWithTag("OldRotManager");
-        }
         if (tmp != null)
         {
             rotationManager = tmp.GetComponent<RotationManager>();
@@ -32,7 +28,6 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadThisLevel(int sceneInd)
     {
-        if (rotationManager != null) rotationManager.gameObject.tag = "OldRotManager";
         StartCoroutine(LoadLevel(sceneInd));
     }
 
