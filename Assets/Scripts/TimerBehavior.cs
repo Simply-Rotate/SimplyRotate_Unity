@@ -27,7 +27,7 @@ public class TimerBehavior : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(canIncreaseTime);
+        /*Debug.Log(canIncreaseTime);*/
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
         if (sceneIndex == 0 || sceneIndex == 1)
         {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Animator transition;
+    private Animator transition;
     public float transitionTime = 1f;
     private RotationManager rotationManager;
 
@@ -24,6 +24,7 @@ public class LevelLoader : MonoBehaviour
                 rotationManager.startLevelIndex = SceneManager.GetActiveScene().buildIndex;
             }
         }
+        transition = GameObject.FindGameObjectWithTag("UI").GetComponent<Animator>();
     }
 
     public void LoadThisLevel(int sceneInd)

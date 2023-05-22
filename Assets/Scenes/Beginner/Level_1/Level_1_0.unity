@@ -908,6 +908,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 475331755}
+    - target: {fileID: 743121053385476697, guid: 5f3405a01070da24e9eb7a78390b4915, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 743121054584653973, guid: 5f3405a01070da24e9eb7a78390b4915, type: 3}
       propertyPath: m_Name
       value: LevelLoader
@@ -1645,6 +1649,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1447996011280596523, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4508233121389429192, guid: 934e1e22031c58b4c93a1c7293e3a6d0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

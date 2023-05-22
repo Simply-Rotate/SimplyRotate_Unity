@@ -442,13 +442,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press ''A'' or ''D'' or the left and right arrow keys to rotate.
-
-
-    Tap
-    ''R'' to restart current stage. Hold ''R'' to fill up the restart bar more than
-    half-way to go back one stage. Fill up entire restart bar to start from first
-    stage.'
+  m_Text: "- Press 'A' or 'D' or the left and right arrow keys to rotate.\n- Tap
+    'R' to restart current stage. \n- Hold 'R' to fill restart bar half way to go
+    back one stage.\n- Hold 'R' to fill entire bar to begin at the starting stage.\n-
+    Press 'esc' to pause the game."
 --- !u!1 &3078626947029241245
 GameObject:
   m_ObjectHideFlags: 0
