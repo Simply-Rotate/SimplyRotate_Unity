@@ -17,4 +17,9 @@ public class EnemyBehavior : MonoBehaviour
         mySource.volume = myRb.velocity.sqrMagnitude / 80f;
         mySource.Play();
     }
+
+    private void OnBecameInvisible()
+    {
+        gameObject.SetActive(false);
+    }
 }

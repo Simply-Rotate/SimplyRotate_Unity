@@ -29,4 +29,9 @@ public class BlockBehavior : MonoBehaviour
         
         mySource.Play();
     }
+
+    private void OnBecameInvisible()
+    {
+        gameObject.SetActive(false);
+    }
 }
