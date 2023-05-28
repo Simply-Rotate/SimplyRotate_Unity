@@ -14,7 +14,8 @@ public class SpawnerBehavior : MonoBehaviour
         {
             if (!hasSpawned)
             {
-                Instantiate(deliveryPrefab, transform.position, Quaternion.identity);
+                GameObject delivery = Instantiate(deliveryPrefab, transform.position, Quaternion.identity);
+                delivery.transform.SetParent(FindObjectOfType<ControlScript>().gameObject.transform);
                 hasSpawned = true;
             }
         }

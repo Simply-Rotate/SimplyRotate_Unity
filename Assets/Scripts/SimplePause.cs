@@ -60,7 +60,6 @@ public class SimplePause : MonoBehaviour
 
     public void QuitToMenu()
     {
-        FindObjectOfType<RotationManager>().tag = "OldRotManager";
         SceneManager.LoadScene(0);
     }
 }
