@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StatsBehavior : MonoBehaviour
 {
     private int numOfRestarts = 0;
+    private float totalRotation = 0f;
     private static StatsBehavior instance = null;
     public static StatsBehavior Instance { get { return Instance; } }
     private void Awake()
@@ -36,8 +37,19 @@ public class StatsBehavior : MonoBehaviour
     {
         numOfRestarts += 1;
     }
+
+    public void AddRotation(float amount)
+    {
+        totalRotation += amount;
+    }
+
     public int GetNumOfRestarts()
     {
         return numOfRestarts;
+    }
+
+    public float GetTotalRotation()
+    {
+        return totalRotation;
     }
 }

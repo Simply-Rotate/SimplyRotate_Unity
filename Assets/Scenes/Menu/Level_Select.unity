@@ -991,9 +991,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6070468224977526124, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070468224977526124, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 332679852}
+    - target: {fileID: 6070468224977526124, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadThisLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070468224977526124, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LevelLoader, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6212689252711076487, guid: ac7075f9e7f8247f7af2d2731a8add57, type: 3}
       propertyPath: m_Color.b
       value: 0.45710218

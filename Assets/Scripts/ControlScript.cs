@@ -18,6 +18,12 @@ public class ControlScript : MonoBehaviour
     private bool canSpeedUp = false;
     private bool hasTriggeredNormal = false;
     public Material VHSShader;
+    private StatsBehavior myStats;
+
+    private void Start()
+    {
+        myStats = FindObjectOfType<StatsBehavior>();
+    }
 
     public void SetRotateAmount(float curAmount, float maxAmount)
     {
@@ -43,7 +49,9 @@ public class ControlScript : MonoBehaviour
         /*float funny = Input.GetAxis("Vertical");*/
         float turn = Input.GetAxis("Horizontal");
         /*transform.Rotate(-funny * rotateSpeed, 0f, -turn * rotateSpeed);*/
-        
+
+        if (myStats != null) myStats.AddRotation(Mathf.Abs(turn));
+
         if (turn == 0f)
         {
             rotateFactor = 0.0f;
