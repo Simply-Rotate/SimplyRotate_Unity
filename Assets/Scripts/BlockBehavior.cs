@@ -24,10 +24,10 @@ public class BlockBehavior : MonoBehaviour
         }
         else
         {
-            mySource.volume = myRb.velocity.sqrMagnitude + 0.5f;
+            mySource.volume = myRb.velocity.sqrMagnitude;
         }
         
-        mySource.Play();
+        mySource.PlayOneShot(mySource.clip);
     }
 
     private void OnBecameInvisible()

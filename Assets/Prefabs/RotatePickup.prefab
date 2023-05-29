@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   addAngleAmount: 50
+  particle: {fileID: 2349277190076858639, guid: afb96f07c2b781c45a633529535f24a4, type: 3}
 --- !u!50 &-5013661474661753392
 Rigidbody2D:
   serializedVersion: 4

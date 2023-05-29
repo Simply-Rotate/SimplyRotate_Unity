@@ -46,10 +46,9 @@ public class DeliveryBehavior : MonoBehaviour
             particles.GetComponent<ParticleSystem>().Play();
             if (canPlaySound)
             {
-                mySource.clip = collision;
                 mySource.pitch = Random.Range(0.75f, 1.0f);
-                mySource.volume = myRb.velocity.sqrMagnitude / 80f;
-                mySource.Play();
+                mySource.volume = myRb.velocity.sqrMagnitude / 95f;
+                mySource.PlayOneShot(collision);
             }
         }
 
@@ -69,10 +68,9 @@ public class DeliveryBehavior : MonoBehaviour
         
         if (other.gameObject.tag == "Powerup")
         {
-            mySource.clip = powerUp;
-            mySource.pitch = Random.Range(0.4f, 0.7f);
+            mySource.pitch = Random.Range(0.7f, 1.0f);
             mySource.volume = 0.7f;
-            mySource.Play();
+            mySource.PlayOneShot(powerUp);
         }
     }
 

@@ -383,7 +383,11 @@ MonoBehaviour:
   launchForce: 4000
   particlePrefab: {fileID: 2349277190076858639, guid: 4f6b594fd8dc76c44a605a78c4b7aea5, type: 3}
   myClips:
-  - {fileID: 8300000, guid: 7284c6a307712f2408e8e5b1d8846bee, type: 3}
+  - {fileID: 8300000, guid: d619519888d5a5a45829720771af1679, type: 3}
+  - {fileID: 8300000, guid: f348e19c329092d499021b7e72dc5cc0, type: 3}
+  - {fileID: 8300000, guid: 1f95efaebe2961841a8e18fd802349c5, type: 3}
+  - {fileID: 8300000, guid: 560e9bd5e3b049b46a495a7094bccb24, type: 3}
+  - {fileID: 8300000, guid: a73064e1df7ff7b448252d3027f52237, type: 3}
 --- !u!82 &8313547775565338856
 AudioSource:
   m_ObjectHideFlags: 0
