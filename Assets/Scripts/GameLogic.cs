@@ -174,7 +174,10 @@ public class GameLogic : MonoBehaviour
                         }
                         else
                         {
-                            rotationManager.previousRotations.Pop();
+                            if (rotationManager.previousRotations.Count != 0)
+                            {
+                                rotationManager.previousRotations.Pop();
+                            }
                         }
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
                     }
@@ -182,7 +185,7 @@ public class GameLogic : MonoBehaviour
                     {
                         restartGUI.SetActive(false);
                         Debug.Log("Hoop" + rotationManager.previousRotations.Peek());
-                        //rotationManager.previousRotations.Pop();
+                        rotationManager.previousRotations.Pop();
                         rotationManager.curRotation = rotationManager.previousRotations.Pop();
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex - 1);
                     }
