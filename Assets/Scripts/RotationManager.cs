@@ -9,7 +9,7 @@ public class RotationManager : MonoBehaviour
     /*public float totalRotation = 200.0f;*/
     public float curRotation = 200.0f;
     public int startLevelIndex = -1;
-    public Stack<float> previousRotations = new Stack<float>();
+    public Stack<float> previousRotations;
     public List<int> levelRotationAmount;
     private static RotationManager instance = null;
     public static RotationManager Instance { get { return Instance; } }
@@ -21,10 +21,8 @@ public class RotationManager : MonoBehaviour
             Destroy(this);
             return;
         }
-        else
-        {
-            instance = this;
-        }
+        instance = this;
+        previousRotations = new Stack<float>();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -41,7 +39,7 @@ public class RotationManager : MonoBehaviour
     {
         curRotation += amount;
         float totalRotation = levelRotationAmount[FindObjectOfType<GameLogic>().curLevel];
-        if (curRotation > totalRotation) curRotation = totalRotation;
+        curRotation = Mathf.Clamp(curRotation, 0.0f, totalRotation);
         FindObjectOfType<ControlScript>().SetRotateAmount(curRotation, totalRotation);
     }
 }

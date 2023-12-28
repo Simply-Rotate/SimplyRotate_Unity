@@ -28,8 +28,8 @@ public class LevelIndicatorBehavior : MonoBehaviour
         GameObject indicator = Instantiate(curLevelIndicatorPrefab, spawnPos, Quaternion.identity);
         indicator.transform.parent = transform;
         Vector3 spawnScale = transform.GetChild(0).transform.localScale * 1.5f;
-        Debug.Log(spawnScale);
-        indicator.transform.localScale = transform.GetChild(0).transform.localScale * 1.5f;
+        // Debug.Log(spawnScale);
+        indicator.transform.localScale = spawnScale;
         
     }
 }

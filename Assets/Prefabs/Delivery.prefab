@@ -141,7 +141,13 @@ MonoBehaviour:
   deathParticles: {fileID: 2349277190076858639, guid: cc203d17ee17d7245bbaf67a5f1678ec, type: 3}
   colParticles: {fileID: 2349277190076858639, guid: 76110d13aee3113498b19d9df56f2e8e, type: 3}
   powerUp: {fileID: 8300000, guid: 28a3234cd341e364c8971f887105bfba, type: 3}
-  collision: {fileID: 8300000, guid: 792fdd2956445004b8d35ca9be64c0e4, type: 3}
+  collision:
+  - {fileID: 8300000, guid: 657234ec5367fee4b98541084b260700, type: 3}
+  - {fileID: 8300000, guid: d991da6727e9bef4786dfb5e4aa92a8f, type: 3}
+  - {fileID: 8300000, guid: f091b4a37a3cec54b84a81c48a4c018b, type: 3}
+  - {fileID: 8300000, guid: fc9be99498eb9294e83ae35bb5460bed, type: 3}
+  - {fileID: 8300000, guid: 66b04374a1b162b47a2da1e27f7beeda, type: 3}
+  - {fileID: 8300000, guid: efae1e67c3ea068439890ac731bd7b48, type: 3}
   canComeBack: 0
 --- !u!82 &8537198616780021643
 AudioSource:
