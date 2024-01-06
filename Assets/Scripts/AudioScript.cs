@@ -30,14 +30,14 @@ public class AudioScript : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex < 2 && !isPlayingTitle)
+        if ((SceneManager.GetActiveScene().buildIndex < 2 || SceneManager.GetActiveScene().buildIndex == 36) && !isPlayingTitle)
         {
             isPlayingTitle = true;
             isPlayingLevel = false;
             mySource.clip = myClips[0];
             mySource.Play();
         }
-        else if (SceneManager.GetActiveScene().buildIndex >= 2 && !isPlayingLevel)
+        else if ((SceneManager.GetActiveScene().buildIndex >= 2 && SceneManager.GetActiveScene().buildIndex != 36) && !isPlayingLevel)
         {
             isPlayingTitle = false;
             isPlayingLevel = true;

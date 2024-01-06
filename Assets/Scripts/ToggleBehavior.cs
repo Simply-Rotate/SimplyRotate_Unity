@@ -13,29 +13,19 @@ public class ToggleBehavior : MonoBehaviour
     }
     private void Update()
     {
-        if (toggleIdex == 0)
-        {
-            if (myToggle.isOn)
-            {
-                FindObjectOfType<GameSettings>().ShowHint(true);
-            }
-            else
-            {
-                FindObjectOfType<GameSettings>().ShowHint(false);
-            }
-        }
-        else if (toggleIdex == 1)
-        {
-            if (myToggle.isOn)
-            {
-                FindObjectOfType<GameSettings>().SetSpeedRun(true);
-            }
-            else
-            {
-                FindObjectOfType<GameSettings>().SetSpeedRun(false);
-            }
-        }
+        // if (toggleIdex == 0)
+        // {
+        //     if (myToggle.isOn)
+        //     {
+        //         FindObjectOfType<GameSettings>().ShowHint(true);
+        //     }
+        //     else
+        //     {
+        //         FindObjectOfType<GameSettings>().ShowHint(false);
+        //     }
+        // }
+        // else 
+        if (toggleIdex != 1) return;
+        FindObjectOfType<GameSettings>().SetSpeedRun(myToggle.isOn);
     }
-
-    
 }

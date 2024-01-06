@@ -45,17 +45,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8229ef3f38f0024cbcff643796ecd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalScenes: 35
+  totalScenes: 36
   curLevel: 0
+  curStage: 0
   isStartingLevel: 0
   minRequired: 0
   loseClips:
-  - {fileID: 8300000, guid: 6fae973157f8d21469f44d4549c43383, type: 3}
-  - {fileID: 8300000, guid: 3dfdb3cd3bc5aaf4b81e57d93000e06c, type: 3}
-  - {fileID: 8300000, guid: 408ee18de6816dc459b8eadc273359c0, type: 3}
-  - {fileID: 8300000, guid: 0ee8672172fc48e41acefbe65591ea0f, type: 3}
+  - {fileID: 8300000, guid: d3536512cd1dfd84493a65a9e5ecbd48, type: 3}
+  - {fileID: 8300000, guid: 2f13825d0ddad0643ae27f15fc54a44f, type: 3}
+  - {fileID: 8300000, guid: 19a1e50954a82b74caba3e77e9fc6c41, type: 3}
   winClips:
-  - {fileID: 8300000, guid: 2427cb5520c58ab4795d13a7802feca6, type: 3}
+  - {fileID: 8300000, guid: 2a671e0e0d7113549b95eb28fc603424, type: 3}
+  - {fileID: 8300000, guid: 48d5eb9099784c446ae7d7a8a9ec252d, type: 3}
+  - {fileID: 8300000, guid: 18f4b7a6b2fc9e3469923a950b4cdeee, type: 3}
 --- !u!82 &-5749246433151710641
 AudioSource:
   m_ObjectHideFlags: 0

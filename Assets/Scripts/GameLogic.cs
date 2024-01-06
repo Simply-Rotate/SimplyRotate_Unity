@@ -9,6 +9,7 @@ public class GameLogic : MonoBehaviour
     [Header("Level Settings")]
     public int totalScenes;
     public int curLevel = 0;
+    public int curStage = 0;
     [SerializeField] private bool isStartingLevel = false;
     [SerializeField] private float minRequired = 0.0f;
 
@@ -36,7 +37,7 @@ public class GameLogic : MonoBehaviour
     private bool curLevelFin = false;
     private GameObject restartIcon;
     private float startingRotationAmount = 0.0f;
-    private GameObject warningBar;
+    // private GameObject warningBar;
     private bool isFlashing;
     private bool isFadingIn = true;
     private TimerBehavior timer;
@@ -56,7 +57,7 @@ public class GameLogic : MonoBehaviour
             losePanel = GameObject.FindGameObjectWithTag("LosePanel");
             restartGUI = GameObject.FindGameObjectWithTag("RestartGUI");
             restartIcon = GameObject.FindGameObjectWithTag("RestartIcon");
-            warningBar = GameObject.FindGameObjectWithTag("WarningBar");
+            // warningBar = GameObject.FindGameObjectWithTag("WarningBar");
             myStats = FindObjectOfType<StatsBehavior>();
             timer = FindObjectOfType<TimerBehavior>();
             mySource = GetComponent<AudioSource>();
@@ -68,11 +69,11 @@ public class GameLogic : MonoBehaviour
             }
             holdTimer = holdToRestart;
 
+            // Getting rotation Manager and setting things up
             GameObject tmp = GameObject.FindGameObjectWithTag("RotationManager");
             if (tmp != null)
             {
                 rotationManager = tmp.GetComponent<RotationManager>();
-                
                 if (isStartingLevel)
                 {
                     rotationManager.previousRotations.Clear();
@@ -87,37 +88,43 @@ public class GameLogic : MonoBehaviour
                 startingRotationAmount = rotationManager.curRotation;
             }
             
-
+            // Initialize UI stuff
             restartGUI.SetActive(false);
             winPanel.SetActive(false);
             losePanel.SetActive(false);
 
-            rotationManager.previousRotations.Push(rotationManager.curRotation);
-            if(rotationManager.curRotation < minRequired)
+            // rotationManager.previousRotations.Push(rotationManager.curRotation);
+            // Only add to previous rotations if it's a new stage in the same level
+            if (curStage == rotationManager.previousRotations.Count)
             {
-                isFlashing = true;
+                rotationManager.previousRotations.Push(rotationManager.curRotation);
             }
-            else
-            {
-                isFlashing = false;
-            }
+            
+            // if (rotationManager.curRotation < minRequired)
+            // {
+            //     isFlashing = true;
+            // }
+            // else
+            // {
+            //     isFlashing = false;
+            // }
 
-            Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
+            // Debug.Log(rotationManager.previousRotations.Peek() + "Woop");
             GameSettings mySettings = FindObjectOfType<GameSettings>();
             Debug.Log(mySettings.GetIsSpeedRun());
-            Debug.Log(mySettings.GetCanShowHint());
-            if (!mySettings.GetCanShowHint())
-            {
-                GameObject[] hints = GameObject.FindGameObjectsWithTag("LevelRotateAmount");
-                Debug.Log(hints);
-                if (hints.Length != 0)
-                {
-                    foreach (GameObject hint in hints)
-                    {
-                        hint.SetActive(false);
-                    }
-                }
-            }
+            // Debug.Log(mySettings.GetCanShowHint());
+            // if (!mySettings.GetCanShowHint())
+            // {
+            //     GameObject[] hints = GameObject.FindGameObjectsWithTag("LevelRotateAmount");
+            //     Debug.Log(hints);
+            //     if (hints.Length != 0)
+            //     {
+            //         foreach (GameObject hint in hints)
+            //         {
+            //             hint.SetActive(false);
+            //         }
+            //     }
+            // }
             if (!mySettings.GetIsSpeedRun())
             {
                 GameObject.FindGameObjectWithTag("TimerUI").SetActive(false);
@@ -165,28 +172,21 @@ public class GameLogic : MonoBehaviour
                     {
                         myStats.AddRestart();
                     }
-                    if (rotationManager.startLevelIndex == SceneManager.GetActiveScene().buildIndex || holdTimer > holdToRestart/2) {
+                    if (isStartingLevel || holdTimer > holdToRestart/2) // Restarting this stage
+                    {
                         restartGUI.SetActive(false);
                         rotationManager.curRotation = startingRotationAmount;
-                        if (rotationManager.startLevelIndex == SceneManager.GetActiveScene().buildIndex)
+                        if (!isStartingLevel)
                         {
-                            rotationManager.previousRotations.Clear();
-                        }
-                        else
-                        {
-                            if (rotationManager.previousRotations.Count != 0)
-                            {
-                                rotationManager.previousRotations.Pop();
-                            }
+                            rotationManager.previousRotations.Pop();
                         }
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex);
                     }
-                    else
+                    else // Restarting from last stage
                     {
                         restartGUI.SetActive(false);
-                        Debug.Log("Hoop" + rotationManager.previousRotations.Peek());
                         rotationManager.previousRotations.Pop();
-                        rotationManager.curRotation = rotationManager.previousRotations.Pop();
+                        rotationManager.curRotation = rotationManager.previousRotations.Peek(); // use last stage's rotation
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex - 1);
                     }
                 }
@@ -203,32 +203,33 @@ public class GameLogic : MonoBehaviour
                     FindObjectOfType<LevelLoader>().LoadThisLevel(0);
                 }
             }
-            if (isFlashing && isFadingIn)
-            {
-                var tempColor = warningBar.GetComponent<Image>().color;
-                tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 1, Time.deltaTime);
-                warningBar.GetComponent<Image>().color = tempColor;
-                if (tempColor.a > 0.9)
-                {
-                    isFadingIn = false;
-                }
-            }
-            else if (isFlashing)
-            {
-                var tempColor = warningBar.GetComponent<Image>().color;
-                tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 0, Time.deltaTime);
-                warningBar.GetComponent<Image>().color = tempColor;
-                if (tempColor.a < 0.1)
-                {
-                    isFadingIn = true;
-                }
-            }
-            else
-            {
-                var tempColor = warningBar.GetComponent<Image>().color;
-                tempColor.a = 0;
-                warningBar.GetComponent<Image>().color = tempColor;
-            }
+            
+            // if (isFlashing && isFadingIn)
+            // {
+            //     var tempColor = warningBar.GetComponent<Image>().color;
+            //     tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 1, Time.deltaTime);
+            //     warningBar.GetComponent<Image>().color = tempColor;
+            //     if (tempColor.a > 0.9)
+            //     {
+            //         isFadingIn = false;
+            //     }
+            // }
+            // else if (isFlashing)
+            // {
+            //     var tempColor = warningBar.GetComponent<Image>().color;
+            //     tempColor.a = Mathf.Lerp(warningBar.GetComponent<Image>().color.a, 0, Time.deltaTime);
+            //     warningBar.GetComponent<Image>().color = tempColor;
+            //     if (tempColor.a < 0.1)
+            //     {
+            //         isFadingIn = true;
+            //     }
+            // }
+            // else
+            // {
+            //     var tempColor = warningBar.GetComponent<Image>().color;
+            //     tempColor.a = 0;
+            //     warningBar.GetComponent<Image>().color = tempColor;
+            // }
         }
         
     }
@@ -265,9 +266,7 @@ public class GameLogic : MonoBehaviour
                 }
                 else
                 {
-                    losePanel.SetActive(true);
                     mySource.clip = loseClips[Random.Range(0, loseClips.Length)];
-                    mySource.pitch = 0.85f;
                     mySource.Play();
                 }
             }
