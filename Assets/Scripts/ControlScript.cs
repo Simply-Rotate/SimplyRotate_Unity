@@ -64,7 +64,8 @@ public class ControlScript : MonoBehaviour
                 rotateBar.value = totalDegrees;
                 if (totalDegrees >= 0.0f)
                 {
-                    transform.Rotate(0f, 0f, -turn * rotateSpeed);
+                    Camera.main.transform.Rotate(0f, 0f, turn * rotateSpeed);
+                    
                     rotateFactor += Mathf.Abs(turn) * 0.5f;
                     if (rotateFactor >= 0.95f)
                     {
@@ -78,10 +79,9 @@ public class ControlScript : MonoBehaviour
             }
             else
             {
-                transform.Rotate(0f, 0f, -turn * rotateSpeed);
+                Camera.main.transform.Rotate(0f, 0f, turn * rotateSpeed);
             }
         }
-        
 
         if (canSpeedUp)
         {
@@ -106,6 +106,9 @@ public class ControlScript : MonoBehaviour
         {
             SceneManager.LoadScene(1);
         }*/
+        
+        Physics2D.gravity = -Camera.main.transform.up * 9.81f;
+
     }
 
     public float GetRotationLeft()

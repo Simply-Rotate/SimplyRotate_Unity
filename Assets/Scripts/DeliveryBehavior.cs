@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class DeliveryBehavior : MonoBehaviour
 {
@@ -27,6 +29,16 @@ public class DeliveryBehavior : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
         {
             gController.FinishLevel(false);
+        }
+    }
+
+    private void Update()
+    {
+        RaycastHit2D hitDown = Physics2D.Raycast(transform.position, Vector2.down);
+        
+        if (hitDown)
+        {
+            
         }
     }
 
@@ -99,7 +111,10 @@ public class DeliveryBehavior : MonoBehaviour
 
     public void StartTimeOut()
     {
-        StartCoroutine(TimeOut());
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(TimeOut());
+        }
     }
 
     IEnumerator InitPhase()

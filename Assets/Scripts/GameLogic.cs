@@ -185,8 +185,11 @@ public class GameLogic : MonoBehaviour
                     else // Restarting from last stage
                     {
                         restartGUI.SetActive(false);
-                        rotationManager.previousRotations.Pop();
-                        rotationManager.curRotation = rotationManager.previousRotations.Peek(); // use last stage's rotation
+                        if (rotationManager.previousRotations.Count > 0)
+                        {
+                            rotationManager.previousRotations.Pop();
+                            rotationManager.curRotation = rotationManager.previousRotations.Peek(); // use last stage's rotation
+                        }
                         FindObjectOfType<LevelLoader>().LoadThisLevel(SceneManager.GetActiveScene().buildIndex - 1);
                     }
                 }
