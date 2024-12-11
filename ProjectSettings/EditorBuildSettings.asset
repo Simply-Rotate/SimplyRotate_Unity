@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Ludare/DRM Login/Login DRM Scene.unity
+    guid: f132e0efda48e3c40ab9cb6957c5d473
+  - enabled: 1
     path: Assets/Scenes/Menu/Menu_.unity
     guid: b676a00fc0b11054d9c96aae88718785
   - enabled: 1
